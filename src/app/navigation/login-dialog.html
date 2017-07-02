@@ -1,0 +1,16 @@
+<div md-dialog-content>
+    <div>
+        <md-input-container>
+            <input mdInput #email placeholder="Your email" type="email">
+        </md-input-container>
+    </div>
+    <div>
+        <md-input-container>
+            <input mdInput #password placeholder="Your password" type="password">
+        </md-input-container>
+    </div>
+</div>
+<div md-dialog-actions>
+    <button (click)="login(email.value, password.value)" type="submit" md-button>Login</button>
+</div>
+

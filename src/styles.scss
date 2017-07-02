@@ -1,0 +1,89 @@
+@import '~@angular/material/theming';
+
+@include mat-core(); // Be sure that you only ever include this mixin once!
+
+$custom-primary: (
+        50: #e3e4ec,
+        100: #b9bcd0,
+        200: #8b8fb1,
+        300: #5c6292,
+        400: #6d62a9,
+        500: #161e63,
+        600: #131a5b,
+        700: #101651,
+        800: #0c1247,
+        900: #060a35,
+        A100: #6e75ff,
+        A200: #3b44ff,
+        A400: #0814ff,
+        A700: #00b7da,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #ffffff,
+                300 : #ffffff,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #ffffff,
+                A200 : #ffffff,
+                A400 : #ffffff,
+                A700 : #ffffff,
+        )
+);
+
+$custom-accent: (
+        50 : #e0f6fb,
+        100 : #b3e9f4,
+        200 : #80dbed,
+        300 : #4dcde5,
+        400 : #26c2e0,
+        500 : #00b7da,
+        600 : #00b0d6,
+        700 : #00a7d0,
+        800 : #009fcb,
+        900 : #0090c2,
+        A100 : #ebf9ff,
+        A200 : #b8eaff,
+        A400 : #85dbff,
+        A700 : #6bd3ff,
+        contrast: (
+                50 : #000000,
+                100 : #000000,
+                200 : #000000,
+                300 : #ffffff,
+                400 : #ffffff,
+                500 : #ffffff,
+                600 : #ffffff,
+                700 : #ffffff,
+                800 : #ffffff,
+                900 : #ffffff,
+                A100 : #000000,
+                A200 : #000000,
+                A400 : #000000,
+                A700 : #ffffff,
+        )
+);
+
+$primary: mat-palette($custom-primary, A200, 400);
+$accent: mat-palette($custom-accent, 500, A700, A400);
+
+$theme: mat-light-theme($primary, $accent);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
+
+$white: #fff;
+
+body {
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    margin: 0;
+}
+
+.mat-card { 
+    background: mat-color($primary, 400, 1); 
+    color: $white;
+}
