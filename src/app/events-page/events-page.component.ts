@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import { EditEventDialogComponent } from './edit-event-dialog/edit-event-dialog.component';
 import { Event } from '../interfaces/event';
 import { EventService } from '../services/event/event.service';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -11,9 +13,16 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class EventsPageComponent implements OnInit {
   events: Array<Event>
-  constructor(private eventService: EventService) { }
+  isAddEventMode: Boolean = false;
+  newEvent = {
+    name: "",
+    description:"",
+    date: new Date()
+  };
+ 
+  constructor(private eventService: EventService, private dialog: MdDialog) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     //this.eventService.addEvent({name:'Event 1', description: 'Event 1 description', date: new Date()});
     this.eventService.getEvents().subscribe(events => {
       this.events = events
@@ -23,5 +32,35 @@ export class EventsPageComponent implements OnInit {
     });
   }
 
-  pageTitle =  'Events';
+  addEvent(name, description, date){
+    //TODO: add form validation
+    if(!name && !description){
+      return;
+    }
+
+    this.newEvent = {
+      name,
+      description,
+      date
+    };
+    
+    this.eventService.addEvent(this.newEvent);
+ 
+     this.newEvent = {
+      name:'',
+      description:'',
+      date: new Date()
+    };
+  }
+
+  deleteEvent(event: Event){
+    this.eventService.deleteEvent(event.$key);
+  }
+
+  editEvent(event: Event){ 
+    let dialogRef = this.dialog.open(EditEventDialogComponent)
+    dialogRef.componentInstance.event = event;
+  } 
+
 }
+

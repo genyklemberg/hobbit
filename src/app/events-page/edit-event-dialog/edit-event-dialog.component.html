@@ -1,0 +1,20 @@
+<div md-dialog-title>Edit event</div>
+<md-dialog-content>
+  <md-input-container>
+      <input  mdInput  #name placeholder="Name" type="text" value="{{event.name}}">
+  </md-input-container>
+  <md-input-container>
+        <textarea  mdInput  #description placeholder="Description">{{event.description}}</textarea>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput [mdDatepicker]="date" placeholder="Choose a date" value="{{event.date}}">
+    <button mdSuffix [mdDatepickerToggle]="date"></button>
+  </md-input-container>
+  <md-datepicker #date></md-datepicker>
+
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button md-dialog-close>Cancel</button>
+  <!--TODO: refactor parameters into one object-->
+  <button md-button (click)="update(name.value, description.value, date.startAt)">Update</button>
+</md-dialog-actions>

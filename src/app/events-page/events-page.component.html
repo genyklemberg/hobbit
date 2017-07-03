@@ -1,3 +1,74 @@
-<p>
-   events-page works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center start">
+    <div fxFlex="50%">
+        <md-card *ngIf="isAddEventMode">   
+            <md-input-container>
+                <input mdInput 
+                       #name 
+                       placeholder="Type name" 
+                       type="text"
+                       value="{{newEvent.name}}">
+            </md-input-container>
+            <md-input-container>
+                <textarea mdInput
+                        #description 
+                        placeholder="Type description">{{newEvent.description}}</textarea>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput [mdDatepicker]="date" placeholder="Choose a date" value="{{newEvent.date}}">
+                <button mdSuffix [mdDatepickerToggle]="date"></button>
+            </md-input-container>
+            <md-datepicker #date></md-datepicker>
+            <div>
+                <button md-button 
+                        color="primary" 
+                        md-raised-button                       
+                        (click)="addEvent(name.value, description.value, date.startAt)">Add event</button>
+            </div>
+        </md-card>
+    </div>
+    
+    <div>
+        <button md-button 
+                color="accent"
+                md-raised-button 
+                class="new-event-btn" 
+                (click)="isAddEventMode = !isAddEventMode"> {{isAddEventMode ? 'Hide from' : 'Add new event'}}</button>
+    </div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center start">
+
+    <div fxFlex="60%">
+        <h3 class="mat-title">Upcomming events</h3>
+        <md-card *ngFor="let event of events" class="event-card" fxLayout="row">
+            <div>
+                <md-icon>date_range</md-icon>
+                <div>{{ event.date | date }}</div>
+            </div> 
+            <div fxFlex>
+                <md-card-title>{{ event.name }}</md-card-title>
+                <md-card-subtitle>{{ event.description }}</md-card-subtitle>
+            </div>           
+           
+
+            <md-card-actions>
+                <button md-icon-button [mdMenuTriggerFor]="menu">
+                    <md-icon>more_vert</md-icon>
+                </button>              
+            </md-card-actions>
+            
+              <md-menu #menu="mdMenu">
+                  <button md-menu-item (click)="editEvent(event)">
+                        <md-icon>mode_edit</md-icon>
+                        <span>Edit event</span>
+                    </button>
+                    <button md-menu-item (click)="deleteEvent(event)">
+                        <md-icon>delete</md-icon>
+                        <span>Delete Event</span>
+                    </button>
+                </md-menu>
+        </md-card>       
+      
+    </div>
+</div>
