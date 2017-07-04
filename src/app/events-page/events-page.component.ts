@@ -14,15 +14,11 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class EventsPageComponent implements OnInit {
   events: Array<Event>
   isAddEventMode: Boolean = false;
-  newEvent = {
-    name: "",
-    description:"",
-    date: new Date()
-  };
- 
-  constructor(private eventService: EventService, private dialog: MdDialog) { }
+  newEvent = this._resetNewEventObj();
 
-  ngOnInit() {    
+  constructor(private eventService: EventService, private dialog: MdDialog) { } 
+  ngOnInit() {  
+    this.events = [];  
     //this.eventService.addEvent({name:'Event 1', description: 'Event 1 description', date: new Date()});
     this.eventService.getEvents().subscribe(events => {
       this.events = events
@@ -37,20 +33,16 @@ export class EventsPageComponent implements OnInit {
     if(!name && !description){
       return;
     }
-
     this.newEvent = {
       name,
       description,
-      date
-    };
-    
-    this.eventService.addEvent(this.newEvent);
- 
-     this.newEvent = {
-      name:'',
-      description:'',
       date: new Date()
-    };
+    }
+
+    this.eventService.addEvent(this.newEvent); 
+    //TODO: need to implement return promise method if event added successfully
+    this.newEvent = this._resetNewEventObj();
+    console.log(this.newEvent);
   }
 
   deleteEvent(event: Event){
@@ -61,6 +53,16 @@ export class EventsPageComponent implements OnInit {
     let dialogRef = this.dialog.open(EditEventDialogComponent)
     dialogRef.componentInstance.event = event;
   } 
+
+  private _resetNewEventObj(){
+    let event:Event = {
+      name:'',
+      description:'',
+      date: new Date()
+    };    
+    return event;
+  }
+
 
 }
 

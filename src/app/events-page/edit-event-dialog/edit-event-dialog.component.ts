@@ -6,7 +6,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'edit-event-dialog',
-  templateUrl: 'edit-event-dialog.component.html',
+  templateUrl: './edit-event-dialog.component.html',
+  styleUrls: ['./edit-event-dialog.component.scss'],
   providers: [EventService, AngularFireDatabase]
 })
 export class EditEventDialogComponent {
