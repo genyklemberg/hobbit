@@ -6,7 +6,7 @@ import { EventService } from '../services/event/event.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
-  selector: 'events-page',
+  selector: 'hb-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.scss'],
   providers: [EventService, AngularFireDatabase]

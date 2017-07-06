@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
-  selector: 'navigation',
+  selector: 'hb-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
