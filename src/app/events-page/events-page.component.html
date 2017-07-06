@@ -1,3 +1,82 @@
-<p>
-   events-page works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center start">
+    <div fxFlex="20%"></div>
+    <div fxFlex="60%">
+        <!-- Add new Event Form-->
+        <div>
+            <md-card *ngIf="isAddEventMode"> 
+                <div>
+                    <md-input-container>
+                        <input mdInput
+                            [(ngModel)]="newEvent.name"
+                            #name 
+                            placeholder="Type name" 
+                            type="text"
+                            value="{{newEvent.name}}">
+                    </md-input-container>
+                </div>
+                <div>            
+                    <md-input-container>
+                        <textarea mdInput
+                                [(ngModel)]="newEvent.description"
+                                #description 
+                                placeholder="Type description">{{newEvent.description}}</textarea>
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                        <input mdInput [mdDatepicker]="date" placeholder="Choose a date" value="{{newEvent.date}}">
+                        <button mdSuffix [mdDatepickerToggle]="date"></button>
+                    </md-input-container>
+                    <md-datepicker #date></md-datepicker>
+                </div>
+                <div>
+                    <button md-button 
+                            color="accent" 
+                            md-raised-button                       
+                            (click)="addEvent(name.value, description.value, date.startAt)">Add event</button>
+                </div>
+            </md-card>
+        </div>
+           <!-- All Events List-->
+        <div>
+            <h3 class="mat-title">Upcomming events</h3>
+            <md-card class="event-card" *ngIf="events.length">
+                <md-list>
+                    <div *ngFor="let event of events">
+                        <div class="margin-y-1">
+                            <md-list-item>
+                                <span class="vertical-line"></span>
+                                <div class="event-date"> 
+                                    {{ event.date | date }}
+                                </div>
+                                <div fxFlex class="event-content">
+                                    <div><b>{{ event.name }}</b></div>
+                                    <div class="mat-caption">{{ event.description }}</div>
+                                </div>                            
+                                <div fxLayout="row">
+                                    <button md-icon-button (click)="editEvent(event)">
+                                        <md-icon>mode_edit</md-icon>
+                                    </button>
+                                    <button md-icon-button (click)="deleteEvent(event)">
+                                        <md-icon>delete</md-icon>
+                                    </button>
+                                </div>                            
+                            </md-list-item> 
+                        </div>                    
+                        <md-divider></md-divider>
+                    </div>
+                </md-list>
+            </md-card>
+        </div>
+        
+    </div>
+    <div fxFlex="20%">
+        <button md-mini-fab
+                color="accent"
+                md-raised-button 
+                class="new-event-btn" 
+                (click)="isAddEventMode = !isAddEventMode">
+                <md-icon>{{ isAddEventMode ? 'keyboard_arrow_up' : 'add'}}</md-icon>
+        </button>
+    </div>
+</div>

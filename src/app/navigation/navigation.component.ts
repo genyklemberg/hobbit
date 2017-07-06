@@ -65,7 +65,7 @@ export class LoginDialogComponent {
   constructor(public dialogRef: MdDialogRef<LoginDialogComponent>, public afAuth: AngularFireAuth) {}
 
  login(email: string,  password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
     .then((response) => {
       this.dialogRef.close(response);
       console.log('after auth', response);
@@ -74,11 +74,8 @@ export class LoginDialogComponent {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        alert(errorMessage);
-      }
+      
+      alert(errorMessage);
       console.log(error);
     });
   }
