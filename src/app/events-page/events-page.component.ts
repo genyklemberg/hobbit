@@ -17,7 +17,7 @@ export class EventsPageComponent implements OnInit {
   isAddEventMode: Boolean = false;
   newEvent = this._resetNewEventObj();
   lazyLoadActive: boolean = true;
-  lazyLoadStep: number = 5;
+  lazyLoadStep: number = 10;
 
   constructor(private eventService: EventService, private dialog: MdDialog) {}
 
@@ -31,7 +31,7 @@ export class EventsPageComponent implements OnInit {
           events = events.slice(1, events.length);
           if (events.length > 0) {
             this.events.push(...events);
-            if (events.length < this.lazyLoadStep) {
+            if (events.length < this.lazyLoadStep - 1) {
               this.lazyLoadActive = false;
             }
           }
