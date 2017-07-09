@@ -5,14 +5,26 @@ import { Event } from '../../interfaces/event';
 
 @Injectable()
 export class EventService {
-  events: FirebaseListObservable<any>
+  events: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
   }
 
-  getEvents(): FirebaseListObservable<any>{
-    this.events = this.db.list('/events');
+  getEvents(itemNumber?: number, startAt?: Object ): FirebaseListObservable<any>{
+    let tempQuery = {};
+    if (startAt) { tempQuery['startAt'] = startAt}
+    if (itemNumber) { tempQuery['limitToFirst'] = itemNumber}
+    if (startAt || itemNumber) {
+      this.events = this.db.list('/events', {
+        query: {
+          startAt: startAt,
+          limitToFirst: itemNumber
+        }
+      });
+    } else {
+      this.events = this.db.list('/events');
+    }
     return this.events;
   }
 
@@ -24,8 +36,8 @@ export class EventService {
     this.events.update(key, this.convertEvent(event));
   }
 
-  deleteEvent(key: string) {    
-    this.events.remove(key); 
+  deleteEvent(key: string) {
+    this.events.remove(key);
   }
 
   deleteAll() {
@@ -33,7 +45,7 @@ export class EventService {
   }
 
   // convert date to string, Firebase cannot save Date object!
-  private convertEvent(event:Event):object {
+  private convertEvent(event:Event): Object {
     let obj = {};
     for (let prop in event) {
       if (prop === 'date'){
