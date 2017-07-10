@@ -3,7 +3,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
 import { MaterialModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -17,6 +17,7 @@ import { NavigationComponent, LoginDialogComponent } from './navigation/navigati
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { GlobalErrorHandler } from './global-error-handler';
 
 
 import { config } from './config/firebase.config';
@@ -47,7 +48,7 @@ const firebaseConfig = config;
     MaterialModule,
     FlexLayoutModule,
   ],
-  providers: [AngularFireAuthProvider],
+  providers: [AngularFireAuthProvider, {provide: ErrorHandler, useClass: GlobalErrorHandler}],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
