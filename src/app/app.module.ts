@@ -18,7 +18,7 @@ import { EventsPageComponent } from './events-page/events-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { GlobalErrorHandler } from './global-error-handler';
-
+import { Logger } from "angular2-logger/core";
 
 import { config } from './config/firebase.config';
 
@@ -42,13 +42,16 @@ const firebaseConfig = config;
     AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
-    MdDatepickerModule, 
+    MdDatepickerModule,
     MdNativeDateModule,
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
   ],
-  providers: [AngularFireAuthProvider, {provide: ErrorHandler, useClass: GlobalErrorHandler}],
+  providers: [AngularFireAuthProvider,
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    Logger
+  ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

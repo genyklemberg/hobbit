@@ -1,7 +1,13 @@
-import { ErrorHandler} from '@angular/core';
+import { ErrorHandler, Injectable} from '@angular/core';
+import { Logger } from "angular2-logger/core";
 
+
+@Injectable()
 export class GlobalErrorHandler implements ErrorHandler{
-    handleError(error) {
-        console.log(error);
-    }
+
+  constructor( private _logger: Logger ){	}
+
+  handleError(error) {
+    this._logger.log(error);
+  }
 }
