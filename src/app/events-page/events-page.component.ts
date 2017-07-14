@@ -5,12 +5,13 @@ import { Event } from '../interfaces/event';
 import { EventService } from '../services/event/event.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HostListener} from "@angular/core";
+import { TelegramService } from '../services/telegram/telegram.service';
 
 @Component({
   selector: 'hb-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.scss'],
-  providers: [EventService, AngularFireDatabase]
+  providers: [EventService, AngularFireDatabase, TelegramService]
 })
 export class EventsPageComponent implements OnInit {
   events: Array<Event>;
@@ -19,7 +20,7 @@ export class EventsPageComponent implements OnInit {
   lazyLoadActive: boolean = true;
   lazyLoadStep: number = 10;
 
-  constructor(private eventService: EventService, private dialog: MdDialog) {}
+  constructor(private telegramService: TelegramService, private eventService: EventService, private dialog: MdDialog) {}
 
   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
     if (this.lazyLoadActive){
@@ -67,6 +68,7 @@ export class EventsPageComponent implements OnInit {
     //TODO: need to implement return promise method if event added successfully
     this.newEvent = this._resetNewEventObj();
     console.log(this.newEvent);
+    this.telegramService.sendMessage(name).subscribe( data => console.log(data), err => console.log(err) );
   }
 
   deleteEvent(event: Event){
