@@ -19,6 +19,7 @@ import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-e
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { GlobalErrorHandler } from './global-error-handler';
 import { Logger } from "angular2-logger/core";
+import { HttpModule }    from '@angular/http';
 
 import { config } from './config/firebase.config';
 
@@ -47,6 +48,7 @@ const firebaseConfig = config;
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+    HttpModule
   ],
   providers: [AngularFireAuthProvider,
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
