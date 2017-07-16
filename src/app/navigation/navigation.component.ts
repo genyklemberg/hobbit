@@ -46,7 +46,7 @@ export class NavigationComponent {
   }  
 
    logout() {
-
+    this.isAuth = false;
     this.afAuth.auth.signOut().then((res)=>{
        this.router.navigate(['/events']);
     }).catch((err)=>{
