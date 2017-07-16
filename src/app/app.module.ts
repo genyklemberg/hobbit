@@ -10,7 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent, LoginDialogComponent } from './navigation/navigation.component';
@@ -48,6 +48,7 @@ const firebaseConfig = config;
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   providers: [AngularFireAuthProvider,

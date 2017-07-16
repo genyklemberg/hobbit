@@ -5,13 +5,15 @@ import { Event } from '../interfaces/event';
 import { EventService } from '../services/event/event.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HostListener} from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Constants }  from '../constants'
 import { TelegramService } from '../services/telegram/telegram.service';
 
 @Component({
   selector: 'hb-events-page',
   templateUrl: './events-page.component.html',
   styleUrls: ['./events-page.component.scss'],
-  providers: [EventService, AngularFireDatabase, TelegramService]
+  providers: [EventService, AngularFireDatabase, Constants, TelegramService]
 })
 export class EventsPageComponent implements OnInit {
   events: Array<Event>;
@@ -19,8 +21,21 @@ export class EventsPageComponent implements OnInit {
   newEvent = this._resetNewEventObj();
   lazyLoadActive: boolean = true;
   lazyLoadStep: number = 10;
-
-  constructor(private telegramService: TelegramService, private eventService: EventService, private dialog: MdDialog) {}
+  event: Event;
+  newEventForm: FormGroup;
+  name:string;
+  description: string;
+  date: Date;
+  minDate = new Date();
+  constructor(private telegramService: TelegramService, private eventService: EventService, private dialog: MdDialog,  private fb: FormBuilder, public ERRORS: Constants){
+    this.newEventForm =fb.group( 
+      {
+        'name': [this.name, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(60)])],
+        'description': [this.description, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(500)])],
+        'date': [this.date, Validators.required]
+      }
+    );
+  }
 
   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
     if (this.lazyLoadActive){
@@ -41,9 +56,17 @@ export class EventsPageComponent implements OnInit {
 
     }
   }
+  
+  newEventPost(post) {
+    this.name = post.name;
+    this.description = post.description;
+    this.date = post.date;
+    this.addEvent(this.name, this.description, this.date);
+    this.isAddEventMode = !this.isAddEventMode;
+  }
 
-  ngOnInit() {
-    this.events = [];
+  ngOnInit() {  
+    this.events = [];  
     //this.eventService.addEvent({name:'Event 1', description: 'Event 1 description', date: new Date()});
     this.eventService.getEvents(this.lazyLoadStep).subscribe(events => {
       this.events = events;
@@ -55,14 +78,11 @@ export class EventsPageComponent implements OnInit {
 
   addEvent(name, description, date){
     //TODO: add form validation
-    if(!name && !description){
-      return;
-    }
     this.newEvent = {
       name,
       description,
-      date: new Date()
-    };
+      date
+    }
 
     this.eventService.addEvent(this.newEvent);
     //TODO: need to implement return promise method if event added successfully
@@ -75,8 +95,13 @@ export class EventsPageComponent implements OnInit {
     this.eventService.deleteEvent(event.$key);
   }
 
-  editEvent(event: Event){
-    let dialogRef = this.dialog.open(EditEventDialogComponent);
+
+  editEvent(event: Event){ 
+    if(!(event.date instanceof Date)){
+      event.date = new Date(event.date)
+    }
+
+    let dialogRef = this.dialog.open(EditEventDialogComponent)
     dialogRef.componentInstance.event = event;
   }
 
