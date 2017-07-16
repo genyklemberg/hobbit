@@ -18,6 +18,7 @@ import { EventsPageComponent } from './events-page/events-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { GlobalErrorHandler } from './global-error-handler';
+import { DialogsService, ConfirmDialog, AlertDialog, PromptDialog } from './common/dialogs.service';
 import { Logger } from "angular2-logger/core";
 import { HttpModule }    from '@angular/http';
 
@@ -31,11 +32,17 @@ const firebaseConfig = config;
     NavigationComponent,
     EventsPageComponent,
     LoginDialogComponent,
+    ConfirmDialog,
+    AlertDialog,
+    PromptDialog,
     EditEventDialogComponent,
     MyProfileComponent
   ],
   entryComponents:[
     LoginDialogComponent,
+    ConfirmDialog,
+    AlertDialog,
+    PromptDialog,
     EditEventDialogComponent
     ],
   imports: [
@@ -53,7 +60,8 @@ const firebaseConfig = config;
   ],
   providers: [AngularFireAuthProvider,
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
-    Logger
+    Logger,
+    DialogsService
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
