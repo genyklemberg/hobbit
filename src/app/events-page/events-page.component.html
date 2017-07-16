@@ -1,40 +1,78 @@
 <div fxLayout="row" fxLayoutAlign="center start">
     <div fxFlex="20%"></div>
     <div fxFlex="60%">
-        <!-- Add new Event Form-->
+        <!-- Add new event Form-->
         <div>
             <md-card *ngIf="isAddEventMode"> 
+                <form [formGroup]="newEventForm" (ngSubmit)="newEventPost(newEventForm.value)">
                 <div>
                     <md-input-container>
                         <input mdInput
-                            [(ngModel)]="newEvent.name"
                             #name 
                             placeholder="Type name" 
                             type="text"
-                            value="{{newEvent.name}}">
+                            formControlName="name"
+                            ng-change="newEventValidation()">
                     </md-input-container>
+                    <md-error *ngIf="!newEventForm.controls['name'].valid && newEventForm.controls['name'].touched">
+                        <div *ngIf="newEventForm.controls['name'].errors.required; else newEventNameMinLength">
+                            {{ERRORS.NAME}} {{ERRORS.IS_REQUIRED}}
+                        </div>
+                        <ng-template #newEventNameMinLength>
+                            <div *ngIf="newEventForm.controls['name'].errors.minlength; else newEventNameMaxLength">
+                                {{ERRORS.NAME}} {{ERRORS.TOO_SHORT}}
+                            </div>
+                        </ng-template>
+                        <ng-template #newEventNameMaxLength>
+                            <div *ngIf="newEventForm.controls['name'].errors.maxlength">
+                                {{ERRORS.NAME}} {{ERRORS.TOO_LONG}}
+                            </div>
+                        </ng-template>
+                    </md-error>
                 </div>
                 <div>            
                     <md-input-container>
                         <textarea mdInput
-                                [(ngModel)]="newEvent.description"
                                 #description 
-                                placeholder="Type description">{{newEvent.description}}</textarea>
+                                placeholder="Type description"
+                                formControlName="description"></textarea>
                     </md-input-container>
+                    <md-error *ngIf="!newEventForm.controls['description'].valid && newEventForm.controls['description'].touched">
+                        <div *ngIf="newEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
+                            {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
+                        </div>
+                        <ng-template #newEventDescriptionMinLength>
+                            <div *ngIf="newEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
+                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
+                            </div>
+                        </ng-template>
+                        <ng-template #newEventDescriptionMaxLength>
+                            <div *ngIf="newEventForm.controls['description'].errors.maxlength">
+                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
+                            </div>
+                        </ng-template>
+                    </md-error>
                 </div>
                 <div>
                     <md-input-container>
-                        <input mdInput [mdDatepicker]="date" placeholder="Choose a date" value="{{newEvent.date}}">
+                        <input mdInput [mdDatepicker]="date" formControlName="date" [min]="minDate"  placeholder="Choose a date">
                         <button mdSuffix [mdDatepickerToggle]="date"></button>
+                        <md-error *ngIf="!newEventForm.controls['date'].valid && newEventForm.controls['date'].touched">
+                            <div *ngIf="newEventForm.controls['date'].errors.required">
+                                {{ERRORS.DATE}} {{ERRORS.DATE_PATTERN}}
+                            </div>
+                        </md-error>
                     </md-input-container>
                     <md-datepicker #date></md-datepicker>
                 </div>
                 <div>
-                    <button md-button 
-                            color="accent" 
-                            md-raised-button                       
-                            (click)="addEvent(name.value, description.value, date.startAt)">Add event</button>
+                    <button md-button
+                        color="accent"
+                        md-raised-button
+                        type="submit" 
+                        [disabled]="!newEventForm.valid"> Add event </button>
                 </div>
+                </form>
             </md-card>
         </div>
            <!-- All Events List-->

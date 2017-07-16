@@ -1,37 +1,81 @@
-<div md-dialog-title>Edit event</div>
-<md-dialog-content>
-  <div>
-    <md-input-container>
-      <input mdInput 
-            #name
-            placeholder="Name" 
-            type="text" 
-            value="{{event.name}}">
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <textarea mdInput
-              #description
-              placeholder="Description">{{event.description}}</textarea>
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <input mdInput
-          [mdDatepicker]="date"
-          placeholder="Choose a date"
-          value="{{event.date}}">
-      <button mdSuffix [mdDatepickerToggle]="date"></button>
-    </md-input-container>
-    <md-datepicker #date></md-datepicker>
-  </div>
-</md-dialog-content>
-<md-dialog-actions>
-  <button md-button md-dialog-close>Cancel</button>
-  <!--TODO: refactor parameters into one object-->
-  <button md-button
-      color="accent"
-      md-raised-button
-      (click)="update(name.value, description.value, date.startAt)">Update</button>
-</md-dialog-actions>
+<div md-dialog-title fxLayout="row" fxLayoutAlign="center start" >Edit event</div>
+<form [formGroup]="updateEventForm" (ngSubmit)="update(updateEventForm.value)"  >
+  <md-dialog-content>
+    <div>
+      <md-input-container>
+        <input mdInput 
+              #name
+              [ngModel]="event.name"
+              placeholder="New name" 
+              type="text" 
+              formControlName="name">
+      </md-input-container>
+      <md-error *ngIf="!updateEventForm.controls['name'].valid && updateEventForm.controls['name'].touched">
+        <div *ngIf="updateEventForm.controls['name'].errors.required; else editEventNameMinLength">
+          {{ERRORS.NAME}} {{ERRORS.IS_REQUIRED}}
+        </div>
+        <ng-template #editEventNameMinLength>
+          <div *ngIf="updateEventForm.controls['name'].errors.minlength; else editEventNameMaxLength">
+            {{ERRORS.NAME}} {{ERRORS.TOO_SHORT}}
+          </div>
+        </ng-template>
+        <ng-template #editEventNameMaxLength>
+          <div *ngIf="updateEventForm.controls['name'].errors.maxlength">
+            {{ERRORS.NAME}} {{ERRORS.TOO_LONG}}
+          </div>
+        </ng-template>
+      </md-error>
+    </div>
+    <div>
+      <md-input-container>
+        <textarea mdInput
+                [ngModel]="event.description"
+                #description
+                placeholder="New description"
+                formControlName="description"></textarea>
+      </md-input-container>
+      <div>
+        <md-error *ngIf="!updateEventForm.controls['description'].valid && updateEventForm.controls['description'].touched">
+                        <div *ngIf="updateEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
+                            {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
+                        </div>
+                        <ng-template #newEventDescriptionMinLength>
+                            <div *ngIf="updateEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
+                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
+                            </div>
+                        </ng-template>
+                        <ng-template #newEventDescriptionMaxLength>
+                            <div *ngIf="updateEventForm.controls['description'].errors.maxlength">
+                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
+                            </div>
+                        </ng-template>
+                    </md-error>
+      </div>
+    </div>
+    <div>
+      <md-input-container>
+        <input mdInput
+            [ngModel]="event.date"
+            [mdDatepicker]="date"
+            placeholder="Choose new date"
+            formControlName="date"
+            [min]="minDate">
+        <button mdSuffix  [mdDatepickerToggle]="date" value={{event.date}} ></button>
+        <md-error *ngIf="!updateEventForm.controls['date'].valid && updateEventForm.controls['date'].touched">
+          <div *ngIf="updateEventForm.controls['date'].errors.required">
+            {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
+          </div>
+        </md-error>
+      </md-input-container>
+      <md-datepicker #date></md-datepicker>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <button md-button md-dialog-close>Cancel</button>
+    <!--TODO: refactor parameters into one object-->
+    <button md-button
+        color="accent"
+        md-raised-button
+        type="submit" [disabled]="!updateEventForm.valid"> Update </button>
+  </md-dialog-actions>
+</form>
