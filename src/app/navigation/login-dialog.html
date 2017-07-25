@@ -2,10 +2,10 @@
     <div>
         <div>
             <md-input-container>
-                <input mdInput 
-                       #email 
+                <input mdInput
+                       #email
                        formControlName="email"
-                       placeholder="Your email" 
+                       placeholder="Your email"
                        type="email">
             </md-input-container>
             <md-error *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
@@ -31,10 +31,10 @@
         </div>
         <div>
             <md-input-container>
-                <input mdInput 
-                       #password 
+                <input mdInput
+                       #password
                        formControlName="password"
-                       placeholder="Your password" 
+                       placeholder="Your password"
                        type="password">
             </md-input-container>
             <md-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
@@ -46,12 +46,12 @@
                             {{ERRORS.PASSWORD}} {{ERRORS.TOO_SHORT}}
                         </div>
                     </ng-template>
-                    <ng-template #maxLengthPassword> 
+                    <ng-template #maxLengthPassword>
                         <div  *ngIf="loginForm.controls['password'].errors.maxlength; else patternPassword">
                             {{ERRORS.PASSWORD}} {{ERRORS.TOO_LONG}}
                         </div>
                     </ng-template>
-                    <ng-template #patternPassword> 
+                    <ng-template #patternPassword>
                         <div  *ngIf="loginForm.controls['password'].errors.pattern">
                             {{ERRORS.PASSWORD}} {{ERRORS.PASSWORD_INVALID}}
                         </div>
@@ -61,8 +61,8 @@
     </div>
     <div>
         <button md-button
-                type="submit" 
+                type="submit"
                 [disabled]="!loginForm.valid"> Login </button>
-        <button md-button md-dialog-close>Cancel</button>
+        <button type="button" md-button [md-dialog-close]="true" (click)="logout()">Cancel</button>
     </div>
 </form>
