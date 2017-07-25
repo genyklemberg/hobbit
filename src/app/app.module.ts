@@ -13,7 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { NavigationComponent, LoginDialogComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { LoginDialogComponent } from './modals/login-dialog/login-dialog.component';
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
