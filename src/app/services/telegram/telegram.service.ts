@@ -9,15 +9,16 @@ import 'rxjs/add/operator/catch'
 @Injectable()
 export class TelegramService {
 
-  private apiUrl = 'http://piscine-baguette-23005.herokuapp.com/'; 
+  private apiUrl = 'https://us-central1-hobbit-61211.cloudfunctions.net/';
 
   constructor(private http: Http) { }
 
   sendMessage(text: string) {
-    let bodyString = JSON.stringify({text:text});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.apiUrl+'sendMessage', bodyString, options)
+    const method = 'TelegramSendMessage';
+    const bodyString = JSON.stringify({text:text});
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + method, bodyString, options)
                          .map((res:Response) => res.json())
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
