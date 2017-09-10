@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperComponent } from 'ng2-img-cropper';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -18,6 +19,7 @@ import { LoginDialogComponent } from './modals/login-dialog/login-dialog.compone
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ProfilePictureCropper, PictureCropper } from './my-profile/profile-picture-cropper/profile-picture-cropper';
 import { GlobalErrorHandler } from './global-error-handler';
 import { DialogsService, ConfirmDialog, AlertDialog, PromptDialog } from './common/dialogs.service';
 import { Logger } from "angular2-logger/core";
@@ -37,13 +39,16 @@ const firebaseConfig = config;
     AlertDialog,
     PromptDialog,
     EditEventDialogComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    PictureCropper,
+    ImageCropperComponent
   ],
   entryComponents:[
     LoginDialogComponent,
     ConfirmDialog,
     AlertDialog,
     PromptDialog,
+    PictureCropper,
     EditEventDialogComponent
     ],
   imports: [
@@ -64,7 +69,8 @@ const firebaseConfig = config;
   providers: [AngularFireAuthProvider,
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
     Logger,
-    DialogsService
+    DialogsService,
+    ProfilePictureCropper
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

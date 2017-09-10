@@ -25,7 +25,7 @@ export class DialogsService {
   }
 
   /** Opens prompt dialog
-   * @example  this.dialogsService
+   * @example  this.DialogsService
                .prompt('Prompt Dialog', 'Enter your name?', 'Name', 'text', '.{3,6}', true)
                .subscribe(result => console.log('Prompt Dialog111', result));
    */
