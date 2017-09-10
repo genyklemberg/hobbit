@@ -1,3 +1,48 @@
-<p>
-  my-profile works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center start">
+  <div fxFlex="25%"></div>
+  <md-card fxFlex="50%">
+    <div fxLayout="row" fxLayoutAlign="center start">
+      <div fxFlex="25%" class="user-avatar">
+        <img src="../../assets/placeholder.png" alt="User avatar" md-card-image>
+        <span class="change-avatar-button" (click)="editAvatar()">Change</span>
+      </div>
+      <div fxFlex="10%"></div>
+      <div fxFlex="40%">
+        <md-card-content>
+          <md-card-title>User_Name</md-card-title>
+          <md-card-subtitle>User_Nick</md-card-subtitle>
+          <p>User_Country</p>
+          <p>User_Location</p>
+          <p>User_Status</p>
+        </md-card-content>
+      </div>
+      <div fxFlex="25%">
+
+        <md-button-toggle-group #group="mdButtonToggleGroup" vertical>
+  <md-button-toggle value="Option one" toggle>
+    Option one
+  </md-button-toggle>
+  <md-button-toggle value="Option two">
+     Option two
+  </md-button-toggle>
+  <md-button-toggle value="Option three">
+     Option three
+  </md-button-toggle>
+  <md-button-toggle value="Option four">
+     Option four
+  </md-button-toggle>
+  <md-button-toggle value="Option five">
+     Option five
+  </md-button-toggle>
+</md-button-toggle-group>
+      </div>
+    </div>
+    <div  fxLayout="row" fxLayoutAlign="center start">
+      <div fxFlex="100%">
+        Selected value: {{group.value}}
+      </div>
+    </div>
+  </md-card>
+  <div fxFlex="25%">
+  </div>
+</div>
