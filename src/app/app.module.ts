@@ -4,7 +4,7 @@ import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
-import { MaterialModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
+import { MaterialModule, MdDialogModule, MdMenuModule , MdDatepickerModule, MdNativeDateModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -51,10 +51,12 @@ const firebaseConfig = config;
     AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    MdDialogModule,
+    MdMenuModule,
     MdDatepickerModule,
     MdNativeDateModule,
     FormsModule,
-    MaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpModule
