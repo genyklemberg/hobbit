@@ -3,13 +3,13 @@
     <div fxFlex="60%">
         <!-- Add new event Form-->
         <div>
-            <md-card *ngIf="isAddEventMode"> 
+            <md-card *ngIf="isAddEventMode">
                 <form [formGroup]="newEventForm" (ngSubmit)="newEventPost(newEventForm.value)">
                 <div>
                     <md-input-container>
                         <input mdInput
-                            #name 
-                            placeholder="Type name" 
+                            #name
+                            placeholder="Type name"
                             type="text"
                             formControlName="name"
                             ng-change="newEventValidation()">
@@ -30,10 +30,10 @@
                         </ng-template>
                     </md-error>
                 </div>
-                <div>            
+                <div>
                     <md-input-container>
                         <textarea mdInput
-                                #description 
+                                #description
                                 placeholder="Type description"
                                 formControlName="description"></textarea>
                     </md-input-container>
@@ -55,8 +55,9 @@
                 </div>
                 <div>
                     <md-input-container>
-                        <input mdInput [mdDatepicker]="date" formControlName="date" [min]="minDate"  placeholder="Choose a date">
-                        <button mdSuffix [mdDatepickerToggle]="date"></button>
+                        <input mdInput [mdDatepicker]="date" formControlName="date" [min]="minDate" placeholder="Choose a date">
+                        <md-datepicker-toggle mdSuffix [for]="date"></md-datepicker-toggle>
+
                         <md-error *ngIf="!newEventForm.controls['date'].valid && newEventForm.controls['date'].touched">
                             <div *ngIf="newEventForm.controls['date'].errors.required">
                                 {{ERRORS.DATE}} {{ERRORS.DATE_PATTERN}}
@@ -69,7 +70,7 @@
                     <button md-button
                         color="accent"
                         md-raised-button
-                        type="submit" 
+                        type="submit"
                         [disabled]="!newEventForm.valid"> Add event </button>
                 </div>
                 </form>
@@ -84,13 +85,13 @@
                         <div class="margin-y-1">
                             <md-list-item>
                                 <span class="vertical-line"></span>
-                                <div class="event-date"> 
+                                <div class="event-date">
                                     {{ event.date | date }}
                                 </div>
                                 <div fxFlex class="event-content">
                                     <div><b>{{ event.name }}</b></div>
                                     <div class="mat-caption">{{ event.description }}</div>
-                                </div>                            
+                                </div>
                                 <div fxLayout="row">
                                     <button md-icon-button (click)="editEvent(event)">
                                         <md-icon>mode_edit</md-icon>
@@ -98,21 +99,21 @@
                                     <button md-icon-button (click)="deleteEvent(event)">
                                         <md-icon>delete</md-icon>
                                     </button>
-                                </div>                            
-                            </md-list-item> 
-                        </div>                    
+                                </div>
+                            </md-list-item>
+                        </div>
                         <md-divider></md-divider>
                     </div>
                 </md-list>
             </md-card>
         </div>
-        
+
     </div>
     <div fxFlex="20%">
         <button md-mini-fab
                 color="accent"
-                md-raised-button 
-                class="new-event-btn" 
+                md-raised-button
+                class="new-event-btn"
                 (click)="isAddEventMode = !isAddEventMode">
                 <md-icon>{{ isAddEventMode ? 'keyboard_arrow_up' : 'add'}}</md-icon>
         </button>
