@@ -3,11 +3,11 @@
   <md-dialog-content>
     <div>
       <md-input-container>
-        <input mdInput 
+        <input mdInput
               #name
               [ngModel]="event.name"
-              placeholder="New name" 
-              type="text" 
+              placeholder="New name"
+              type="text"
               formControlName="name">
       </md-input-container>
       <md-error *ngIf="!updateEventForm.controls['name'].valid && updateEventForm.controls['name'].touched">
@@ -55,12 +55,13 @@
     <div>
       <md-input-container>
         <input mdInput
-            [ngModel]="event.date"
-            [mdDatepicker]="date"
-            placeholder="Choose new date"
-            formControlName="date"
-            [min]="minDate">
-        <button mdSuffix  [mdDatepickerToggle]="date" value={{event.date}} ></button>
+               [ngModel]="event.date"
+               [mdDatepicker]="date"
+               placeholder="Choose new date"
+               formControlName="date"
+               [min]="minDate">
+        <md-datepicker-toggle mdSuffix [for]="date"></md-datepicker-toggle>
+
         <md-error *ngIf="!updateEventForm.controls['date'].valid && updateEventForm.controls['date'].touched">
           <div *ngIf="updateEventForm.controls['date'].errors.required">
             {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
