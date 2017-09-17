@@ -22,8 +22,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfilePictureCropper, PictureCropper } from './my-profile/profile-picture-cropper/profile-picture-cropper';
 import { GlobalErrorHandler } from './global-error-handler';
 import { DialogsService, ConfirmDialog, AlertDialog, PromptDialog } from './common/dialogs.service';
-import { Logger } from "angular2-logger/core";
-import { HttpModule }    from '@angular/http';
+import { Logger } from 'angular2-logger/core';
+import { HttpModule } from '@angular/http';
 
 import { config } from './config/firebase.config';
 
@@ -67,12 +67,12 @@ const firebaseConfig = config;
     HttpModule
   ],
   providers: [AngularFireAuthProvider,
-    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    // {provide: ErrorHandler, useClass: GlobalErrorHandler},
     Logger,
     DialogsService,
     ProfilePictureCropper
   ],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
