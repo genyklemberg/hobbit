@@ -1,18 +1,21 @@
 <md-toolbar color="primary">
-  <span>{{title}}</span>
-  <span fxFlex></span> 
-  <button *ngIf="!isAuth" (click)="openDialog()" md-button>
+    <span>{{title}}</span>
+    <button routerLink="" md-icon-button>
+        <md-icon>home</md-icon>
+      </button>
+    <span fxFlex></span>
+    <button *ngIf="!isAuth" (click)="openDialog()" md-button>
     Login
   </button>
-  <button *ngIf="isAuth" md-icon-button [mdMenuTriggerFor]="UserMenu">
+    <button *ngIf="isAuth" md-icon-button [mdMenuTriggerFor]="UserMenu">
     <img class="user-image" 
     src="https://www.tm-town.com/assets/default_male300x300-aae6ae0235b6cd78cee8df7ae19f6085.png" alt="User avatar">
   </button>
 </md-toolbar>
 
-<md-menu  #UserMenu="mdMenu" yPosition="below" xPosition="after" >
-  <button md-menu-item routerLink="/my-profile"> Profile </button>
-   <!--<md-divider></md-divider>-->
-   <hr>
-  <button md-menu-item (click)="logout()"> Log out </button>
+<md-menu #UserMenu="mdMenu" yPosition="below" xPosition="after">
+    <button md-menu-item routerLink="/my-profile"> Profile </button>
+    <!--<md-divider></md-divider>-->
+    <hr>
+    <button md-menu-item (click)="logout()"> Log out </button>
 </md-menu>
