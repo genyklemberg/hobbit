@@ -4,7 +4,7 @@ import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
-import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
+import {MdListModule, MdButtonToggleModule, MdSelectModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,8 +56,7 @@ const firebaseConfig = config;
     AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule,
+    MdListModule, MdSelectModule, MdButtonToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule,
     MdDialogModule,
     MdDatepickerModule,
     MdNativeDateModule,
