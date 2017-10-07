@@ -4,18 +4,7 @@ import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
-import { MaterialModule, 
-         MdButtonModule, 
-         MdCardModule, 
-         MdMenuModule, 
-         MdToolbarModule, 
-         MdIconModule, 
-         MdInputModule, 
-         MdTabsModule, 
-         MdDialogModule, 
-         MdDatepickerModule, 
-         MdNativeDateModule,
-         MdGridListModule } from '@angular/material';
+import {MdListModule, MdButtonToggleModule, MdSelectModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,6 +61,7 @@ const firebaseConfig = config;
     AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
+<<<<<<< HEAD
     MaterialModule,
     MdButtonModule, 
     MdCardModule, 
@@ -81,6 +71,9 @@ const firebaseConfig = config;
     MdInputModule, 
     MdTabsModule,
     MdGridListModule,
+=======
+    MdListModule, MdSelectModule, MdButtonToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule,
+>>>>>>> acfdca6faccaec2797cf7e5b372b2682963a1d91
     MdDialogModule,
     MdDatepickerModule,
     MdNativeDateModule,
