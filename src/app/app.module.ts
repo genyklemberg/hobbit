@@ -4,7 +4,18 @@ import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
-import { MaterialModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
+import { MaterialModule, 
+         MdButtonModule, 
+         MdCardModule, 
+         MdMenuModule, 
+         MdToolbarModule, 
+         MdIconModule, 
+         MdInputModule, 
+         MdTabsModule, 
+         MdDialogModule, 
+         MdDatepickerModule, 
+         MdNativeDateModule,
+         MdGridListModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +37,9 @@ import { Logger } from 'angular2-logger/core';
 import { HttpModule } from '@angular/http';
 
 import { config } from './config/firebase.config';
+import { HbHomePageComponent } from './hb-home-page/hb-home-page.component';
+import { DailyEventVidgetComponent } from './common/daily-event-vidget/daily-event-vidget.component';
+
 
 const firebaseConfig = config;
 
@@ -41,7 +55,9 @@ const firebaseConfig = config;
     EditEventDialogComponent,
     MyProfileComponent,
     PictureCropper,
-    ImageCropperComponent
+    ImageCropperComponent,
+    HbHomePageComponent,
+    DailyEventVidgetComponent
   ],
   entryComponents:[
     LoginDialogComponent,
@@ -57,7 +73,14 @@ const firebaseConfig = config;
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule,
+    MdButtonModule, 
+    MdCardModule, 
+    MdMenuModule, 
+    MdToolbarModule, 
+    MdIconModule, 
+    MdInputModule, 
+    MdTabsModule,
+    MdGridListModule,
     MdDialogModule,
     MdDatepickerModule,
     MdNativeDateModule,

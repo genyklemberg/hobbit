@@ -3,22 +3,29 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { EventsPageComponent } from './events-page/events-page.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { HbHomePageComponent } from './hb-home-page/hb-home-page.component';
+import { DailyEventVidgetComponent } from './common/daily-event-vidget/daily-event-vidget.component'
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/events',
-    pathMatch: 'full'
-  },
-  { 
-    path: 'events', 
-    component: EventsPageComponent,
-    data: {pageTitle: 'Events from rounts'}
-  },
-  {
-    path: 'my-profile', 
-    component: MyProfileComponent
+    component: HbHomePageComponent,
+    children: [
+      {
+        path: 'event-vidget',
+        component: DailyEventVidgetComponent
+      },
+      {
+        path: 'events', 
+        component: EventsPageComponent,
+        data: {pageTitle: 'Events from rounts'}
+      },
+      {
+        path: 'my-profile', 
+        component: MyProfileComponent
+      }
+    ]
   }
 ]
 
