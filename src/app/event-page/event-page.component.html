@@ -1,0 +1,80 @@
+<div fxLayout="row" fxLayoutAlign="center start">
+    <div fxFlex="20%"></div>
+    <div fxFlex="60%">
+        <!-- edit Event Form-->
+        <div>
+            <md-card *ngIf="isEditEventMode">
+                <form [formGroup]="editEventForm" (ngSubmit)="updateEvent(editEventForm.value)">
+                    <div>
+                        <md-input-container>
+                            <input mdInput #name [ngModel]="event?.name" placeholder="New name" type="text" formControlName="name">
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container>
+                            <input mdInput [mdDatepicker]="startDate" formControlName="startDate" [min]="minDate" [ngModel]="event?.startDate" placeholder="Choose start date">
+                            <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
+                        </md-input-container>
+                        <md-datepicker #startDate></md-datepicker>
+                    </div>
+                    <div>
+                        <md-input-container>
+                            <input mdInput [mdDatepicker]="endDate" formControlName="endDate" [min]="event?.startDate ? event?.startDate : minDate" [ngModel]="event?.endDate" placeholder="Choose end date">
+                            <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
+                        </md-input-container>
+                        <md-datepicker #endDate></md-datepicker>
+                    </div>
+                    <div>
+                        <md-input-container>
+                            <textarea mdInput #location [ngModel]="event?.location" placeholder="New location" formControlName="location"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container>
+                            <textarea mdInput #description [ngModel]="event?.description" placeholder="New description" formControlName="description"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <md-input-container>
+                            <textarea mdInput #comment [ngModel]="event?.comment" placeholder="Add comments, e.i. time, place, etc." formControlName="comment"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div>
+                        <button md-button color="accent" md-raised-button type="submit" [disabled]="!editEventForm.valid"> Save event </button>
+                        <button md-button color="accent" md-raised-button type="reset" (click)="editEvent(event)"> Cancel </button>
+                    </div>
+                </form>
+            </md-card>
+        </div>
+        <!-- Events Details-->
+        <div>
+            <md-card *ngIf="!isEditEventMode">
+                <h3 class="mat-title">{{ event?.name }}</h3>
+                <div class="margin-y-1">
+                    <div *ngIf="event?.startDate!=null; else elseBlock" class="event-date">
+                            {{ event?.startDate | date }} <span *ngIf = "event?.endDate && event.startDate != event?.endDate">- {{ event.endDate | date}} </span>
+                        </div> 
+                        <ng-template #elseBlock>
+                            <div class="event-date" >{{ event?.date | date }}</div>
+                        </ng-template>
+                    <div *ngIf = "event?.location" class="event-content mat-caption">{{ event.location }}</div>
+                    <div class="event-content mat-caption">{{ event?.description }}</div>
+                    <div *ngIf = "event?.comment" class="event-comment mat-caption"> * {{ event.comment }}</div>
+                    <div>
+                        <button md-icon-button (click)="editEvent(event)">
+                                        <md-icon>mode_edit</md-icon>
+                                    </button>
+                        <button md-icon-button (click)="deleteEvent(event)">
+                                        <md-icon>delete</md-icon>
+                                    </button>
+                    </div>
+                </div>
+            </md-card>
+        </div>
+    </div>
+    <div fxFlex="20%">
+        <button md-mini-fab color="accent" md-raised-button class="edit-event-btn" (click)="editEvent(event)">
+                <md-icon>{{ isEditEventMode ? 'keyboard_arrow_up' : 'edit'}}</md-icon>
+        </button>
+    </div>
+</div>

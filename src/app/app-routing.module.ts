@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { EventsPageComponent } from './events-page/events-page.component';
+import { EventPageComponent } from './event-page/event-page.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
@@ -12,9 +13,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { 
+    path: 'event/:key', 
+    component: EventPageComponent,
+    data: {pageTitle: 'Event details'}
+  },
+  { 
     path: 'events', 
     component: EventsPageComponent,
-    data: {pageTitle: 'Events from rounts'}
+    data: {pageTitle: 'Events from routes'}
   },
   {
     path: 'my-profile', 

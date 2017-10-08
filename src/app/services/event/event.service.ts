@@ -6,6 +6,7 @@ import { Event } from '../../interfaces/event';
 @Injectable()
 export class EventService {
   events: FirebaseListObservable<any>;
+  dateProperties = ['date','startDate','endDate'];
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
@@ -28,6 +29,10 @@ export class EventService {
     return this.events;
   }
 
+  getEvent(itemKey: string){
+    return this.db.object('/events/'+ itemKey);
+  }
+
   addEvent(event:Event) {
     this.events.push(this.convertEvent(event));
   }
@@ -48,13 +53,14 @@ export class EventService {
   private convertEvent(event:Event): Object {
     let obj = {};
     for (let prop in event) {
-      if (prop === 'date'){
-        obj[prop] = event[prop].toUTCString();
-      } else {
-        obj[prop] = event[prop];
+      if (event[prop] != null){
+        if (this.dateProperties.includes(prop)){
+          obj[prop] = event[prop].toUTCString();
+        } else {
+          obj[prop] = event[prop];
+        }
       }
     }
     return obj;
   }
-
 }

@@ -28,48 +28,100 @@
     </div>
     <div>
       <md-input-container>
-        <textarea mdInput
-                [ngModel]="event.description"
-                #description
-                placeholder="New description"
-                formControlName="description"></textarea>
-      </md-input-container>
-      <div>
-        <md-error *ngIf="!updateEventForm.controls['description'].valid && updateEventForm.controls['description'].touched">
-                        <div *ngIf="updateEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
-                            {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
-                        </div>
-                        <ng-template #newEventDescriptionMinLength>
-                            <div *ngIf="updateEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
-                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
-                            </div>
-                        </ng-template>
-                        <ng-template #newEventDescriptionMaxLength>
-                            <div *ngIf="updateEventForm.controls['description'].errors.maxlength">
-                                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
-                            </div>
-                        </ng-template>
-                    </md-error>
-      </div>
-    </div>
-    <div>
-      <md-input-container>
         <input mdInput
-               [ngModel]="event.date"
-               [mdDatepicker]="date"
-               placeholder="Choose new date"
-               formControlName="date"
+               [ngModel]="event?.startDate"
+               [mdDatepicker]="startDate"
+               placeholder="Choose new start date"
+               formControlName="startDate"
                [min]="minDate">
-        <md-datepicker-toggle mdSuffix [for]="date"></md-datepicker-toggle>
+        <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
 
-        <md-error *ngIf="!updateEventForm.controls['date'].valid && updateEventForm.controls['date'].touched">
-          <div *ngIf="updateEventForm.controls['date'].errors.required">
-            {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
+        <md-error *ngIf="!updateEventForm.controls['startDate'].valid && updateEventForm.controls['startDate'].touched">
+          <div *ngIf="updateEventForm.controls['startDate'].errors.required">
+            {{ERRORS.STARTDATE}} {{ERRORS.IS_REQUIRED}}
           </div>
         </md-error>
       </md-input-container>
-      <md-datepicker #date></md-datepicker>
+      <md-datepicker #startDate></md-datepicker>
     </div>
+    <div>
+        <md-input-container>
+          <input mdInput
+                 [ngModel]="event?.endDate"
+                 [mdDatepicker]="endDate"
+                 placeholder="Choose new end date"
+                 formControlName="endDate"
+                 [min]="event.startDate ? event.startDate : minDate">
+          <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
+  
+          <md-error *ngIf="!updateEventForm.controls['endDate'].valid && updateEventForm.controls['endDate'].touched">
+            <div *ngIf="updateEventForm.controls['date'].errors.required">
+              {{ERRORS.ENDDATE}} {{ERRORS.IS_REQUIRED}}
+            </div>
+          </md-error>
+        </md-input-container>
+        <md-datepicker #endDate></md-datepicker>
+      </div>
+      <div>
+          <md-input-container>
+              <textarea mdInput #location [ngModel]="event?.location" placeholder="New location" formControlName="location"></textarea>
+          </md-input-container>
+          <div>
+              <md-error *ngIf="!updateEventForm.controls['location'].valid && updateEventForm.controls['location'].touched">
+                  <div *ngIf="updateEventForm.controls['location'].errors.required; else newEventLocationMinLength">
+                      {{ERRORS.LOCATION}} {{ERRORS.IS_REQUIRED}}
+                  </div>
+                  <ng-template #newEventLocationMinLength>
+                      <div *ngIf="updateEventForm.controls['location'].errors.minlength; else newEventLocationMaxLength">
+                          {{ERRORS.LOCATION}} {{ERRORS.TOO_SHORT}}
+                      </div>
+                  </ng-template>
+                  <ng-template #newEventLocationMaxLength>
+                      <div *ngIf="updateEventForm.controls['location'].errors.maxlength">
+                          {{ERRORS.LOCATION}} {{ERRORS.TOO_LONG}}
+                      </div>
+                  </ng-template>
+              </md-error>
+            </div>
+      </div>
+      <div>
+          <md-input-container>
+            <textarea mdInput
+                    [ngModel]="event.description"
+                    #description
+                    placeholder="New description"
+                    formControlName="description"></textarea>
+          </md-input-container>
+          <div>
+            <md-error *ngIf="!updateEventForm.controls['description'].valid && updateEventForm.controls['description'].touched">
+                <div *ngIf="updateEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
+                    {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
+                </div>
+                <ng-template #newEventDescriptionMinLength>
+                    <div *ngIf="updateEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
+                        {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
+                    </div>
+                </ng-template>
+                <ng-template #newEventDescriptionMaxLength>
+                    <div *ngIf="updateEventForm.controls['description'].errors.maxlength">
+                        {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
+                    </div>
+                </ng-template>
+            </md-error>
+          </div>
+        </div>
+      <div>
+          <md-input-container>
+              <textarea mdInput #comment [ngModel]="event?.comment" placeholder="Add comments, e.i. time, place, etc." formControlName="comment"></textarea>
+          </md-input-container>
+          <div>
+              <md-error *ngIf="!updateEventForm.controls['comment'].valid && updateEventForm.controls['comment'].touched">
+                    <div *ngIf="updateEventForm.controls['comment'].errors.maxlength">
+                        {{ERRORS.COMMENT}} {{ERRORS.TOO_LONG}}
+                    </div>
+              </md-error>
+            </div>
+      </div>
   </md-dialog-content>
   <md-dialog-actions>
     <button md-button md-dialog-close>Cancel</button>

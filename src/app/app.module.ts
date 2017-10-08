@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LoginDialogComponent } from './modals/login-dialog/login-dialog.component';
 import { EventsPageComponent } from './events-page/events-page.component';
+import { EventPageComponent } from './event-page/event-page.component';
 import { EditEventDialogComponent } from './events-page/edit-event-dialog/edit-event-dialog.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfilePictureCropper, PictureCropper } from './my-profile/profile-picture-cropper/profile-picture-cropper';
@@ -34,6 +35,7 @@ const firebaseConfig = config;
     AppComponent,
     NavigationComponent,
     EventsPageComponent,
+    EventPageComponent,
     LoginDialogComponent,
     ConfirmDialog,
     AlertDialog,
