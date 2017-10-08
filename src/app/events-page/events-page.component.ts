@@ -26,13 +26,20 @@ export class EventsPageComponent implements OnInit {
   name:string;
   description: string;
   date: Date;
+  startDate: Date;
+  endDate: Date;
+  location: string;
+  comment: string;
   minDate = new Date();
   constructor(private telegramService: TelegramService, private eventService: EventService, private dialog: MdDialog,  private fb: FormBuilder, public ERRORS: Constants){
     this.newEventForm =fb.group( 
       {
         'name': [this.name, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(60)])],
         'description': [this.description, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(500)])],
-        'date': [this.date, Validators.required]
+        'startDate': [this.startDate, Validators.required],
+        'endDate': [this.endDate, Validators.required],
+        'location': [this.location, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(500)])],
+        'comment': [this.comment, Validators.compose([Validators.maxLength(500)])]   
       }
     );
   }
@@ -59,9 +66,13 @@ export class EventsPageComponent implements OnInit {
   
   newEventPost(post) {
     this.name = post.name;
+    this.startDate = post.startDate;
+    this.endDate = post.endDate;
     this.description = post.description;
-    this.date = post.date;
-    this.addEvent(this.name, this.description, this.date);
+    this.location = post.location;
+    this.comment = post.comment;
+    this.addEvent(this.name, this.startDate, this.endDate, this.description,
+      this.location, this.comment);
     this.isAddEventMode = !this.isAddEventMode;
   }
 
@@ -76,12 +87,15 @@ export class EventsPageComponent implements OnInit {
     });
   }
 
-  addEvent(name, description, date){
+  addEvent(name, startDate, endDate, description, location, comment){
     //TODO: add form validation
     this.newEvent = {
       name,
+      startDate,
+      endDate,
       description,
-      date
+      location,
+      comment
     }
 
     this.eventService.addEvent(this.newEvent);
@@ -97,10 +111,12 @@ export class EventsPageComponent implements OnInit {
 
 
   editEvent(event: Event){ 
-    if(!(event.date instanceof Date)){
-      event.date = new Date(event.date)
+    if(event.startDate!=null && !(event.startDate instanceof Date)){
+      event.startDate = new Date(event.startDate)
     }
-
+    if(event.endDate!=null && !(event.endDate instanceof Date)){
+      event.endDate = new Date(event.endDate)
+    }
     let dialogRef = this.dialog.open(EditEventDialogComponent)
     dialogRef.componentInstance.event = event;
   }
@@ -108,8 +124,12 @@ export class EventsPageComponent implements OnInit {
   private _resetNewEventObj(){
     let event:Event = {
       name:'',
+      date: new Date(),
+      startDate: new Date(),
+      endDate: new Date(),
       description:'',
-      date: new Date()
+      location:'',
+      comment:'',
     };
     return event;
   }

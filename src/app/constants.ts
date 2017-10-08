@@ -1,7 +1,11 @@
 export class Constants {
     public readonly NAME = "Name"
     public readonly DESCRIPTION = "Description"
+    public readonly LOCATION = "Location"
+    public readonly COMMENT = "Comment"
     public readonly DATE = "Date"
+    public readonly STARTDATE = "Start date"
+    public readonly ENDDATE = "End date"
     public readonly EMAIL = "Email"
     public readonly PASSWORD = "Password"
     public readonly IS_REQUIRED = "is required"
