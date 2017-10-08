@@ -4,7 +4,8 @@ import { AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler} from '@angular/core';
-import {MdListModule, MdButtonToggleModule, MdSelectModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
+import {MdListModule, MdButtonToggleModule, MdSelectModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule, MdSnackBarModule} from '@angular/material';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,9 @@ import { DialogsService, ConfirmDialog, AlertDialog, PromptDialog } from './comm
 import { Logger } from 'angular2-logger/core';
 import { HttpModule } from '@angular/http';
 
+import {SearchPageComponent} from './search-page/search-page.component';
+import {AgmCoreModule} from '@agm/core';
+import {MapComponent} from './search-page/map/map.component';
 import { config } from './config/firebase.config';
 
 const firebaseConfig = config;
@@ -43,7 +47,9 @@ const firebaseConfig = config;
     EditEventDialogComponent,
     MyProfileComponent,
     PictureCropper,
-    ImageCropperComponent
+    ImageCropperComponent,
+    SearchPageComponent,
+    MapComponent,
   ],
   entryComponents:[
     LoginDialogComponent,
@@ -58,14 +64,27 @@ const firebaseConfig = config;
     AngularFireModule.initializeApp(firebaseConfig),
     BrowserModule,
     BrowserAnimationsModule,
-    MdListModule, MdSelectModule, MdButtonToggleModule, MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule, MdInputModule, MdTabsModule, MdDialogModule, MdDatepickerModule, MdNativeDateModule,
+    MdListModule,
+    MdSelectModule,
+    MdButtonToggleModule,
+    MdButtonModule,
+    MdCardModule,
+    MdMenuModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdInputModule,
+    MdTabsModule,
     MdDialogModule,
     MdDatepickerModule,
     MdNativeDateModule,
+    MdSnackBarModule,
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDBySGzJrTokoKrb8GE4oG_2yQ7xh-J1dc'
+    })
   ],
   providers: [AngularFireAuthProvider,
     // {provide: ErrorHandler, useClass: GlobalErrorHandler},

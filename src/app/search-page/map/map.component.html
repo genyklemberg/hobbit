@@ -1,0 +1,15 @@
+<agm-map [styles]="customStyle"
+         [latitude]="49.853338"
+         [longitude]="24.024192"
+         [disableDefaultUI]="true"
+         [scrollwheel]="false"
+         [zoom]="13"
+         fullscreenControl="true">
+  <agm-marker *ngFor="let pos of coordinates" [latitude]="pos.latitude" [longitude]="pos.longitude"></agm-marker>
+  <agm-circle [latitude]="49.853338" [longitude]="24.024192"
+              [radius]="1000"
+              [fillColor]="'red'"
+              [circleDraggable]="true"
+              [editable]="true">
+  </agm-circle>
+</agm-map>

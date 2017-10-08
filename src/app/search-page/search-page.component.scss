@@ -1,0 +1,21 @@
+.search-card {
+  //max-width: 600px;
+  margin: 20px auto 40px;
+  .icon-in-input {
+    position: absolute;
+    right: 0;
+    top: 3px;
+  }
+  .search-input {
+    width: calc(100% - 30px);
+  }
+}
+
+
+md-select {
+  padding-bottom: 1.25em;
+  width: 100%;
+}
+
+
+
