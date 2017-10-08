@@ -26,6 +26,8 @@ import { GlobalErrorHandler } from './global-error-handler';
 import { DialogsService, ConfirmDialog, AlertDialog, PromptDialog } from './common/dialogs.service';
 import { Logger } from 'angular2-logger/core';
 import { HttpModule } from '@angular/http';
+import { DailyEventVidgetComponent } from './common/daily-event-vidget/daily-event-vidget.component';
+import { HbHomePageComponent } from './hb-home-page/hb-home-page.component'
 
 import {SearchPageComponent} from './search-page/search-page.component';
 // import {AgmCoreModule} from '@agm/core';
@@ -37,6 +39,8 @@ const firebaseConfig = config;
 @NgModule({
   declarations: [
     AppComponent,
+    DailyEventVidgetComponent,
+    HbHomePageComponent,
     NavigationComponent,
     EventsPageComponent,
     EventPageComponent,

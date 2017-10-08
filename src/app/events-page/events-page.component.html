@@ -32,8 +32,8 @@
                              #event_type>
                     <md-option *ngFor="let type of event_types" [value]="type.value">{{ type.viewValue }}</md-option>
                   </md-select>
-                  <md-select placeholder="Select City" formControlName="citie" ng-change="newEventValidation()" #citie>
-                    <md-option *ngFor="let citie of cities" [value]="citie.value">{{ citie.viewValue }}</md-option>
+                  <md-select placeholder="Select City" formControlName="city" ng-change="newEventValidation()" #city>
+                    <md-option *ngFor="let city of cities" [value]="city.value">{{ city.viewValue }}</md-option>
                   </md-select>
                   <md-select placeholder="Select District" formControlName="district" ng-change="newEventValidation()"
                              #district>
@@ -118,7 +118,7 @@
                             <md-list-item>
                                 <span class="vertical-line"></span>
                                 <div *ngIf="event?.startDate; else elseBlock" class="event-date">
-                                        {{ event?.startDate | date }} </div> 
+                                        {{ event?.startDate | date }} </div>
                                 <ng-template #elseBlock>
                                     <div class="event-date" >{{ event?.date | date }}</div>
                                 </ng-template>

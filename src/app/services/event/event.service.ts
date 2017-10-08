@@ -7,10 +7,14 @@ import { Event } from '../../interfaces/event';
 export class EventService {
   events: FirebaseListObservable<any>;
 <<<<<<< HEAD
+<<<<<<< HEAD
   curDate: Object = new Date();
 =======
   dateProperties = ['date','startDate','endDate'];
 >>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
+=======
+  curDate: Object = new Date();
+>>>>>>> bf6a12dc54657ea2204296363aa0628969157308
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
@@ -34,6 +38,9 @@ export class EventService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bf6a12dc54657ea2204296363aa0628969157308
   getRecentEvents() {
      this.events = this.db.list('/events', {
         query: {
@@ -43,6 +50,7 @@ export class EventService {
       })
       return this.events;
       
+<<<<<<< HEAD
   }
 
 
@@ -52,6 +60,11 @@ export class EventService {
   }
 
 >>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
+=======
+  }
+
+
+>>>>>>> bf6a12dc54657ea2204296363aa0628969157308
   addEvent(event:Event) {
     this.events.push(this.convertEvent(event));
   }
