@@ -17,40 +17,31 @@ export class SearchPageComponent implements OnInit {
   event: Event;
   lastKeypress: number = 0;
   // left column
-  name: string;
-  event_type: string;
   event_types = [
     {value: 'sport', viewValue: 'Sport'},
     {value: 'casual', viewValue: 'Casual'},
     {value: 'puzzle', viewValue: 'Puzzle'},
     {value: 'box', viewValue: 'Box'},
   ];
-  city: string;
   cities = [
     {value: 'lviv', viewValue: 'Lviv'},
     {value: 'odesa', viewValue: 'Odesa'},
     {value: 'kyiv', viewValue: 'Kyiv'}
   ];
-  district: string;
   districts = [
     {value: 'Frankivskiy', viewValue: 'Frankivskiy'},
     {value: 'Galitskiy', viewValue: 'Galitskiy'},
     {value: 'Shevchenkivskiy', viewValue: 'Shevchenkivskiy'},
   ];
-  event_category: string;
   event_categories = [
     {value: 'casual', viewValue: 'Casual'},
     {value: 'tournament', viewValue: 'Tournament'},
   ];
   // right column
-  event_mode: string;
   event_modes = [
     {value: 'single', viewValue: 'Single'},
     {value: 'team', viewValue: 'Team'},
   ];
-  date: Date;
-  time: string;
-  price: string;
 
   constructor(private eventService: EventService) {
   }

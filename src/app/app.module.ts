@@ -33,6 +33,7 @@ import {SearchPageComponent} from './search-page/search-page.component';
 import {AgmCoreModule} from '@agm/core';
 import {MapComponent} from './search-page/map/map.component';
 import { config } from './config/firebase.config';
+import { AddEventComponent } from './events-page/add-event/add-event.component';
 
 const firebaseConfig = config;
 
@@ -54,6 +55,8 @@ const firebaseConfig = config;
     ImageCropperComponent,
     SearchPageComponent,
     MapComponent,
+    AddEventComponent,
+
   ],
   entryComponents:[
     LoginDialogComponent,

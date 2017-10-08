@@ -89,4 +89,8 @@ export class EventService {
     });
   }
 
+  getAllEvent(): FirebaseListObservable<any> {
+    return this.db.list('/events', {
+    });
+  }
 }

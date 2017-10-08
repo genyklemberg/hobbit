@@ -12,4 +12,6 @@ export interface Event {
   endDate?: Date,
   time?: string,
   price?: string,
+  lat?: string,
+  lng?: string,
 }
