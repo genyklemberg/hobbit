@@ -33,7 +33,7 @@ export class EventsPageComponent implements OnInit {
     {value: 'puzzle', viewValue: 'Puzzle'},
     {value: 'box', viewValue: 'Box'},
   ];
-  citie: string;
+  city: string;
   cities = [
     {value: 'lviv', viewValue: 'Lviv'},
     {value: 'odesa', viewValue: 'Odesa'},
@@ -61,12 +61,12 @@ export class EventsPageComponent implements OnInit {
   time: string;
   price: string;
   constructor(public snackBar: MdSnackBar, private telegramService: TelegramService, private eventService: EventService, private dialog: MdDialog,  private fb: FormBuilder, public ERRORS: Constants){
-    this.newEventForm =fb.group(
+    this.newEventForm = fb.group(
       {
         // left column
         'name': [this.name, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(60)])],
         'event_type': [this.event_type, Validators.required],
-        'citie': [this.citie, Validators.required],
+        'city': [this.city, Validators.required],
         'district': [this.district, Validators.required],
         'event_category': [this.event_category, Validators.required],
         // right column
@@ -103,7 +103,7 @@ export class EventsPageComponent implements OnInit {
     // left column
     this.name = post.name;
     this.event_type = post.event_type;
-    this.citie = post.citie;
+    this.city = post.city;
     this.district = post.district;
     this.event_category = post.event_category;
     // right column
@@ -112,7 +112,7 @@ export class EventsPageComponent implements OnInit {
     this.date = post.date;
     this.time = post.time;
     this.price = post.price;
-    this.addEvent(this.name, this.event_type, this.citie, this.district, this.event_category, this.description, this.event_mode, this.date, this.time, this.price);
+    this.addEvent(this.name, this.event_type, this.city, this.district, this.event_category, this.description, this.event_mode, this.date, this.time, this.price);
     this.isAddEventMode = !this.isAddEventMode;
   }
 
@@ -127,13 +127,13 @@ export class EventsPageComponent implements OnInit {
     });
   }
 
-  addEvent(name, event_type, citie, district, event_category, description, event_mode, date, time, price) {
+  addEvent(name, event_type, city, district, event_category, description, event_mode, date, time, price) {
     //TODO: add form validation
     this.newEvent = {
       // left column
       name,
       event_type,
-      citie,
+      city,
       district,
       event_category,
       // right column
@@ -169,7 +169,7 @@ export class EventsPageComponent implements OnInit {
       // left column
       name: '',
       event_type: '',
-      citie: '',
+      city: '',
       district: '',
       event_category: '',
       // right column

@@ -25,7 +25,7 @@ export class SearchPageComponent implements OnInit {
     {value: 'puzzle', viewValue: 'Puzzle'},
     {value: 'box', viewValue: 'Box'},
   ];
-  citie: string;
+  city: string;
   cities = [
     {value: 'lviv', viewValue: 'Lviv'},
     {value: 'odesa', viewValue: 'Odesa'},
