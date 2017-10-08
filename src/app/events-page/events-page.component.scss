@@ -1,11 +1,5 @@
-a {
-    color: inherit;
-    text-decoration: none;
-    /* no underline */
-}
-
-.event-card {
-    .mat-icon-button {
+.event-card{
+    .mat-icon-button{
         color: rgba(0, 0, 0, 0.48);
         transition: color .2s linear;
         &:hover {
@@ -13,10 +7,9 @@ a {
         }
     }
 }
-
-.event-content {
+.event-content{
     overflow: hidden;
-    &>* {
+    & > *{
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -58,4 +51,12 @@ a {
             color: rgba(0, 0, 0, 0.64);
         }
     }
+}
+md-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.newEventForm {
+  margin: 40px 0;
 }

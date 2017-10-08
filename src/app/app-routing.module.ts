@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventsPageComponent } from './events-page/events-page.component';
 import { EventPageComponent } from './event-page/event-page.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
-
+import {SearchPageComponent} from './search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -23,8 +23,12 @@ const routes: Routes = [
     data: {pageTitle: 'Events from routes'}
   },
   {
-    path: 'my-profile', 
+    path: 'my-profile',
     component: MyProfileComponent
+  },
+  {
+    path: 'search-events',
+    component: SearchPageComponent
   }
 ]
 

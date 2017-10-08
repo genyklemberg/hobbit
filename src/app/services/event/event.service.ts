@@ -63,4 +63,17 @@ export class EventService {
     }
     return obj;
   }
+
+  searchEvent(start, end): FirebaseListObservable<any> {
+    return this.db.list('/events', {
+      query: {
+        searchByTitle: 'Title',
+        orderByChild: 'name',
+        limitToFirst: 20,
+        startAt: start,
+        endAt: end
+      }
+    });
+  }
+
 }

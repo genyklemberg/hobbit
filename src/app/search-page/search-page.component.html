@@ -1,0 +1,83 @@
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="events">
+  <div fxFlex="1040px">
+    <md-card class="search-card">
+      <md-card-title> Search for events</md-card-title>
+      <form class="example-form">
+        <md-form-field class="search-events">
+          <input mdInput class="search-input" (focus)="search($event)" autofocus (keyup)="search($event)">
+          <md-icon class="icon-in-input">search</md-icon>
+        </md-form-field>
+      </form>
+    </md-card>
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <div fxFlex="45%">
+        <md-card>
+          <md-card-subtitle>Filter results</md-card-subtitle>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div fxFlex="46%">
+              <md-select placeholder="Event type">
+                <md-option *ngFor="let type of event_types" [value]="type.value">
+                  {{ type.viewValue }}
+                </md-option>
+              </md-select>
+              <md-select placeholder="Select City">
+                <md-option *ngFor="let citie of cities" [value]="citie.value">
+                  {{ citie.viewValue }}
+                </md-option>
+              </md-select>
+              <md-select placeholder="Select District">
+                <md-option *ngFor="let district of districts" [value]="district.value">
+                  {{ district.viewValue }}
+                </md-option>
+              </md-select>
+              <md-select placeholder="Event category">
+                <md-option *ngFor="let category of event_categories" [value]="category.value">
+                  {{ category.viewValue }}
+                </md-option>
+              </md-select>
+            </div>
+            <div fxFlex="46%">
+              <md-select placeholder="Event Mode">
+                <md-option *ngFor="let mode of event_modes" [value]="mode.value">
+                  {{ mode.viewValue }}
+                </md-option>
+              </md-select>
+              <md-form-field>
+                <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker></md-datepicker>
+              </md-form-field>
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Time">
+              </md-form-field>
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Price">
+              </md-form-field>
+            </div>
+          </div>
+        </md-card>
+        <md-card>
+          <hb-map></hb-map>
+        </md-card>
+      </div>
+      <div fxFlex="53%">
+        <md-card class="event-card">
+          <md-card-subtitle>Events in area</md-card-subtitle>
+          <md-list>
+            <div *ngFor="let event of events">
+              <md-list-item>
+                {{event.name}}
+                <md-divider></md-divider>
+              </md-list-item>
+            </div>
+          </md-list>
+          <div *ngIf="events.length < 1">
+            <md-card-content>
+              No results found :(
+            </md-card-content>
+          </div>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>
