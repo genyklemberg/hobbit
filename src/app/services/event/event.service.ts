@@ -8,6 +8,10 @@ export class EventService {
   events: FirebaseListObservable<any>;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  dateProperties = ['date','startDate','endDate'];
+>>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
   curDate: Object = new Date();
 =======
   dateProperties = ['date','startDate','endDate'];
@@ -39,16 +43,24 @@ export class EventService {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> bf6a12dc54657ea2204296363aa0628969157308
+=======
+  getEvent(itemKey: string) {
+    return this.db.object('/events/' + itemKey);
+  }
+
+>>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
   getRecentEvents() {
      this.events = this.db.list('/events', {
         query: {
-          orderByChild: '/name', 
-          startAt: false 
+          orderByChild: '/name',
+          startAt: false
         }
       })
       return this.events;
+<<<<<<< HEAD
       
 <<<<<<< HEAD
   }
@@ -66,10 +78,17 @@ export class EventService {
 
 >>>>>>> bf6a12dc54657ea2204296363aa0628969157308
   addEvent(event:Event) {
+=======
+
+  }
+
+
+  addEvent(event: Event) {
+>>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
     this.events.push(this.convertEvent(event));
   }
 
-  updateEvent(key: string, event:Event) {
+  updateEvent(key: string, event: Event) {
     this.events.update(key, this.convertEvent(event));
   }
 
