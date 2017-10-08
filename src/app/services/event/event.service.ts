@@ -6,7 +6,7 @@ import { Event } from '../../interfaces/event';
 @Injectable()
 export class EventService {
   events: FirebaseListObservable<any>;
-  dateProperties = ['date','startDate','endDate'];
+  curDate: Object = new Date();
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
@@ -29,9 +29,17 @@ export class EventService {
     return this.events;
   }
 
-  getEvent(itemKey: string){
-    return this.db.object('/events/'+ itemKey);
+  getRecentEvents() {
+     this.events = this.db.list('/events', {
+        query: {
+          orderByChild: '/name', 
+          startAt: false 
+        }
+      })
+      return this.events;
+      
   }
+
 
   addEvent(event:Event) {
     this.events.push(this.convertEvent(event));

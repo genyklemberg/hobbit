@@ -1,0 +1,94 @@
+<h3 class="mat-title">Recent events</h3>
+<md-card class="event-card">
+    <md-list>
+        <md-list-item class="date-item">
+            <div class="date-list-icon">
+                <md-icon>date_range</md-icon>
+            </div>
+            <div fxFlex class="date-holder day">
+                {{ curDate | date: 'dd' }}
+            </div>
+            <div fxFlex class="date-holder">
+                <div class="date-holder time">
+                    {{ curDate | date: 'HH:MM' }}
+                </div>
+                <div class="date-holder month">
+                        {{ curDate | date: 'MMMM' }}
+                </div>
+            </div>
+            <div class="date-icon" fxLayout="row">
+                <md-icon>send</md-icon>
+            </div>
+        </md-list-item>
+        <md-divider></md-divider>                  
+    </md-list>
+    <md-tab-group>
+        <md-tab label="Current events" style="padding: 0px">
+            <div class="events-holder">
+                <md-list>
+                    <div class="no-events" *ngIf="curGames.length == 0">
+                        No games
+                    </div>
+                    <div *ngFor="let event of curGames; let i=index">
+                        <div *ngIf="i < 10">
+                            <md-list-item>
+                                <div class="event-logo">
+                                    some logo
+                                </div>
+                                <div fxFlex class="event-descript">
+                                    <div><b>{{ event.name }}</b></div>
+                                    <div class="mat-caption">{{ event.city }} - {{ event.district }} district</div>
+                                </div>
+                                <div fxLayout="row">
+                                    <div class="event-time">
+                                        {{ event.time  }}                                    
+                                    </div>
+                                    <div class="event-map">
+                                        <md-icon>place</md-icon>
+                                    </div>
+                                </div>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                        </div>  
+                    </div> 
+                    <div class="more-btn" fxLayout="row" fxLayoutAlign="end center">
+                        <button >Show all</button>
+                    </div>                 
+                </md-list>
+            </div>
+        </md-tab>
+        <md-tab label="Nearest tournaments">
+            <div class="events-holder">
+                <md-list>
+                    <div class="no-events" *ngIf="curGames.length == 0">
+                        No tournaments
+                    </div>
+                    <div *ngFor="let event of curTournaments; let i=index">
+                        <div *ngIf="i < 10">
+                            <md-list-item>
+                                <div class="event-logo">
+                                    some logo
+                                </div>
+                                <div fxFlex class="event-descript">
+                                    <div><b>{{ event.description }}</b></div>
+                                </div>
+                                <div fxLayout="row">
+                                    <div class="event-time">
+                                        {{ event.date | date: 'HH:MM' }}                                    
+                                    </div>
+                                    <div class="event-map">
+                                        <md-icon>place</md-icon>
+                                    </div>
+                                </div>
+                            </md-list-item>
+                            <md-divider></md-divider>
+                        </div>
+                    </div>
+                    <div class="more-btn" fxLayout="row" fxLayoutAlign="end center">
+                        <button>Show all</button>
+                    </div>               
+                </md-list>
+            </div>
+        </md-tab>
+    </md-tab-group>
+</md-card>
