@@ -1,11 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center center" *ngIf="events">
-  <!--<div fxFlex="1040px">-->
-  <div fxFlex="60%">
+<div fxLayout="row" fxLayoutAlign="center start" *ngIf="events">
+  <div fxFlex="1040px">
     <md-card class="search-card">
       <md-card-title> Search for events</md-card-title>
       <form class="example-form">
         <md-form-field class="search-events">
-          <input mdInput class="search-input" (focus)="search($event)" autofocus (keyup)="search($event)">
+          <input mdInput class="search-input" (focus)="search($event)" (keyup)="search($event)" autofocus>
           <md-icon class="icon-in-input">search</md-icon>
         </md-form-field>
       </form>
@@ -82,3 +81,4 @@
     </div>
   </div>
 </div>
+
