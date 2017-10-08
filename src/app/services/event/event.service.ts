@@ -6,7 +6,11 @@ import { Event } from '../../interfaces/event';
 @Injectable()
 export class EventService {
   events: FirebaseListObservable<any>;
+<<<<<<< HEAD
   curDate: Object = new Date();
+=======
+  dateProperties = ['date','startDate','endDate'];
+>>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
@@ -29,6 +33,7 @@ export class EventService {
     return this.events;
   }
 
+<<<<<<< HEAD
   getRecentEvents() {
      this.events = this.db.list('/events', {
         query: {
@@ -41,6 +46,12 @@ export class EventService {
   }
 
 
+=======
+  getEvent(itemKey: string){
+    return this.db.object('/events/'+ itemKey);
+  }
+
+>>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
   addEvent(event:Event) {
     this.events.push(this.convertEvent(event));
   }
@@ -61,13 +72,27 @@ export class EventService {
   private convertEvent(event:Event): Object {
     let obj = {};
     for (let prop in event) {
-      if (prop === 'date'){
-        obj[prop] = event[prop].toUTCString();
-      } else {
-        obj[prop] = event[prop];
+      if (event[prop] != null){
+        if (this.dateProperties.includes(prop)){
+          obj[prop] = event[prop].toUTCString();
+        } else {
+          obj[prop] = event[prop];
+        }
       }
     }
     return obj;
+  }
+
+  searchEvent(start, end): FirebaseListObservable<any> {
+    return this.db.list('/events', {
+      query: {
+        searchByTitle: 'Title',
+        orderByChild: 'name',
+        limitToFirst: 20,
+        startAt: start,
+        endAt: end
+      }
+    });
   }
 
 }

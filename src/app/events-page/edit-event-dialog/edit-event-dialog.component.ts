@@ -13,18 +13,23 @@ import { Constants }  from '../../constants'
 })
 export class EditEventDialogComponent {
   event: Event; 
-  oldEvent: Event;
   updateEventForm: FormGroup;
   name:string;
+  startDate: Date;
+  endDate: Date;
   description: string;
-  date: Date;
+  location: string;
+  comment: string;
   minDate = new Date();
   constructor(private eventService: EventService, private dialogRef: MdDialogRef <EditEventDialogComponent>, private fb: FormBuilder, public ERRORS: Constants){
     this.updateEventForm =fb.group( 
       {
         'name': [this.name, Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(60)])],
+        'startDate': [this.startDate, Validators.required],
+        'endDate': [this.endDate, Validators.required],
         'description': [this.description, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(500)])],
-        'date': [this.date, Validators.required]
+        'location': [this.location, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(500)])],
+        'comment': [this.comment, Validators.compose([Validators.maxLength(500)])]
       } 
     );
   }
@@ -32,7 +37,10 @@ export class EditEventDialogComponent {
     let updatedEvent = {
       name: post.name,
       description: post.description,
-      date: post.date
+      startDate: post.startDate,
+      endDate: post.endDate,
+      location: post.location,
+      comment: post.comment
     };
     this.eventService.updateEvent(this.event.$key, updatedEvent);
     this.dialogRef.close();

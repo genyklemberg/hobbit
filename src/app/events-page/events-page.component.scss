@@ -1,50 +1,62 @@
-.event-card{   
+.event-card{
     .mat-icon-button{
         color: rgba(0, 0, 0, 0.48);
         transition: color .2s linear;
-        &:hover{
-             color: rgba(0, 0, 0, 0.87);
+        &:hover {
+            color: rgba(0, 0, 0, 0.87);
         }
     }
 }
-.event-content{   
-    overflow: hidden;   
-    & > *{       
+.event-content{
+    overflow: hidden;
+    & > *{
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
     }
 }
-.event-date{
+
+.event-date {
     margin-right: 8px;
     width: 50px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.48);
     transition: color .2s linear;
 }
-.margin-y-1{
+
+.margin-y-1 {
     margin: 8px 0;
 }
-.new-event-btn{
+
+.new-event-btn {
     margin-left: 8px;
     // width: 124px;
 }
-.mat-list-item{
-     .vertical-line{
-            display: block;
-            background: rgba(0, 0, 0, 0.12);
-            width: 4px;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            transition: background .2s linear;
-        }
-    &:hover{
-       .vertical-line{
-           background: rgba(59, 68, 255, 0.48);
-       }
-       .event-date{
-           color: rgba(0, 0, 0, 0.64);
-       }
+
+.mat-list-item {
+    .vertical-line {
+        display: block;
+        background: rgba(0, 0, 0, 0.12);
+        width: 4px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        transition: background .2s linear;
     }
+    &:hover {
+        .vertical-line {
+            background: rgba(59, 68, 255, 0.48);
+        }
+        .event-date {
+            color: rgba(0, 0, 0, 0.64);
+        }
+    }
+}
+md-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.newEventForm {
+  margin: 40px 0;
 }
