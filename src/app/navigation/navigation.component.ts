@@ -39,7 +39,6 @@ export class NavigationComponent {
     const dialogRef = this.dialog.open(LoginDialogComponent, { disableClose: true });
     dialogRef.afterClosed().subscribe(result => {
       this.user = result;
-      this.isAuth = true;
     });
 
   }

@@ -2,18 +2,18 @@
     <span>{{title}}</span>
     <button routerLink="" md-icon-button>
         <md-icon>home</md-icon>
-      </button>
-  <button routerLink="/search-events" md-icon-button>
-    <md-icon>search</md-icon>
-  </button>
+    </button>
+    <button routerLink="/search-events" md-icon-button>
+        <md-icon>search</md-icon>
+    </button>
     <span fxFlex></span>
     <button *ngIf="!isAuth" (click)="openDialog()" md-button>
-    Login
-  </button>
+        Login
+    </button>
     <button *ngIf="isAuth" md-icon-button [mdMenuTriggerFor]="UserMenu">
-    <img class="user-image"
-    src="https://www.tm-town.com/assets/default_male300x300-aae6ae0235b6cd78cee8df7ae19f6085.png" alt="User avatar">
-  </button>
+        <img class="user-image"
+             src="https://www.tm-town.com/assets/default_male300x300-aae6ae0235b6cd78cee8df7ae19f6085.png" alt="User avatar">
+    </button>
 </md-toolbar>
 
 <md-menu #UserMenu="mdMenu" yPosition="below" xPosition="after">

@@ -39,6 +39,7 @@ export class LoginDialogComponent {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((response) => {
         this.dialogRef.close(response);
+        this.isAuth = true;
         console.log('after auth', response);
       })
       .catch((error: firebase.FirebaseError) => {
@@ -50,11 +51,6 @@ export class LoginDialogComponent {
         console.log(error);
 
       });
-  }
-
-  closeDialog() {
-    console.log('working perfectly');
-    this.dialogRef.close();
   }
 
 }
