@@ -11,31 +11,28 @@ import {SearchPageComponent} from './search-page/search-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: HbHomePageComponent,
-    children: [
-      {
-        path: 'event-vidget',
-        component: DailyEventVidgetComponent
-      },
-      {
-        path: 'events', 
-        component: EventsPageComponent,
-        data: {pageTitle: 'Events from rounts'}
-      },
-      { 
-        path: 'event/:key', 
-        component: EventPageComponent,
-        data: {pageTitle: 'Event details'}
-      },
-      {
-        path: 'my-profile', 
-        component: MyProfileComponent
-      },
-      {
-        path: 'search-events',
-        component: SearchPageComponent
-      }]
-  }]
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HbHomePageComponent
+  },
+  {
+    path: 'event/:key',
+    component: EventPageComponent,
+    data: {pageTitle: 'Event details'}
+  },
+  {
+    path: 'my-profile',
+    component: MyProfileComponent
+  },
+  {
+    path: 'search-events',
+    component: SearchPageComponent
+  },
+  { path: '**', redirectTo: 'home' }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
