@@ -1,3 +1,4 @@
+<h3 class="mat-title">Recent events</h3>
 <md-card class="event-card">
     <md-list>
         <md-list-item class="date-item">
@@ -35,11 +36,12 @@
                                     some logo
                                 </div>
                                 <div fxFlex class="event-descript">
-                                    <div><b>{{ event.description }}</b></div>
+                                    <div><b>{{ event.name }}</b></div>
+                                    <div class="mat-caption">{{ event.city }} - {{ event.district }} district</div>
                                 </div>
                                 <div fxLayout="row">
                                     <div class="event-time">
-                                        {{ event.date | date: 'HH:MM' }}                                    
+                                        {{ event.time  }}                                    
                                     </div>
                                     <div class="event-map">
                                         <md-icon>place</md-icon>
