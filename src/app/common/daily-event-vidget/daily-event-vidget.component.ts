@@ -51,6 +51,7 @@ export class DailyEventVidgetComponent implements OnInit {
     this.eventService.getRecentEvents().subscribe((events) => {
       this.recentEvents = events;
       this.getCurrentEvents(this.recentEvents);
+      this.recentEvents = [];
       console.log(this.curGames);      
     }); 
     console.log(this.curDate);

@@ -6,19 +6,8 @@ import { Event } from '../../interfaces/event';
 @Injectable()
 export class EventService {
   events: FirebaseListObservable<any>;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   dateProperties = ['date','startDate','endDate'];
->>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
   curDate: Object = new Date();
-=======
-  dateProperties = ['date','startDate','endDate'];
->>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
-=======
-  curDate: Object = new Date();
->>>>>>> bf6a12dc54657ea2204296363aa0628969157308
 
   constructor(private db: AngularFireDatabase) {
     this.events = this.db.list('/events');
@@ -41,17 +30,10 @@ export class EventService {
     return this.events;
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> bf6a12dc54657ea2204296363aa0628969157308
-=======
   getEvent(itemKey: string) {
     return this.db.object('/events/' + itemKey);
   }
 
->>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
   getRecentEvents() {
      this.events = this.db.list('/events', {
         query: {
@@ -60,31 +42,9 @@ export class EventService {
         }
       })
       return this.events;
-<<<<<<< HEAD
-      
-<<<<<<< HEAD
   }
-
-
-=======
-  getEvent(itemKey: string){
-    return this.db.object('/events/'+ itemKey);
-  }
-
->>>>>>> 767e1cea9d786e7a879afae71f2d9a409b8f4d30
-=======
-  }
-
-
->>>>>>> bf6a12dc54657ea2204296363aa0628969157308
-  addEvent(event:Event) {
-=======
-
-  }
-
 
   addEvent(event: Event) {
->>>>>>> c6251cf75d77e5e6388ff6deab39288f315317c2
     this.events.push(this.convertEvent(event));
   }
 
@@ -92,8 +52,8 @@ export class EventService {
     this.events.update(key, this.convertEvent(event));
   }
 
-  deleteEvent(key: string) {
-    this.events.remove(key);
+  deleteEvent(event: Event) {
+    this.events.remove(event.$key);
   }
 
   deleteAll() {
