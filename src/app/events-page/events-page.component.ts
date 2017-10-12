@@ -62,7 +62,7 @@ export class EventsPageComponent implements OnInit {
 
 
   deleteEvent(event: Event){
-    this.eventService.deleteEvent(event.$key);
+    this.eventService.deleteEvent(event);
   }
 
 

@@ -42,9 +42,7 @@ export class EventService {
         }
       })
       return this.events;
-
   }
-
 
   addEvent(event: Event) {
     this.events.push(this.convertEvent(event));
@@ -54,8 +52,8 @@ export class EventService {
     this.events.update(key, this.convertEvent(event));
   }
 
-  deleteEvent(key: string) {
-    this.events.remove(key);
+  deleteEvent(event: Event) {
+    this.events.remove(event.$key);
   }
 
   deleteAll() {
