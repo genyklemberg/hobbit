@@ -17,7 +17,6 @@ import { TelegramService } from '../services/telegram/telegram.service';
 })
 export class EventsPageComponent implements OnInit {
   events: Array<Event>;
-  isAddEventMode: Boolean = false;
   lazyLoadActive: boolean = true;
   lazyLoadStep: number = 10;
   event: Event;

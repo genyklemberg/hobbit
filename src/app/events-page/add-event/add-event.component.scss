@@ -14,3 +14,12 @@ agm-map {
 .newEventForm {
   margin: 0 0 20px;
 }
+.add_event_btn {
+  position: relative;
+  width: 100%;
+  button {
+    position: absolute;
+    right: -50px;
+    top: 0;
+  }
+}
