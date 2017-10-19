@@ -1,143 +1,148 @@
 <div fxLayout="row" fxLayoutAlign="space-between end">
-  <div fxFlexFill></div>
+  <div class="add_event_btn">
     <button md-mini-fab
             color="accent"
             md-raised-button
             class="new-event-btn"
-            (click)="isAddEventMode = !isAddEventMode">
+            (click)="isAddEventMode = !isAddEventMode; this.newEventForm.reset()">
       <md-icon>{{ isAddEventMode ? 'keyboard_arrow_up' : 'add'}}</md-icon>
     </button>
+  </div>
 </div>
-
-<md-card *ngIf="isAddEventMode" class="newEventForm">
-  <md-card-title>Add new event</md-card-title>
-  <form [formGroup]="newEventForm"
-        (ngSubmit)="newEventPost(newEventForm.value); openSnackBar('New event successfully added'); this.newEventForm.reset() ">
-    <div fxLayout="row" fxLayoutAlign="space-between start">
-      <div fxFlex="48%">
-        <md-form-field>
-          <input mdInput placeholder="Event name" formControlName="name" ng-change="newEventValidation()" #name
-                 autofocus>
-          <md-error *ngIf="!newEventForm.controls['name'].valid && newEventForm.controls['name'].touched">
-            <div *ngIf="newEventForm.controls['name'].errors.required; else newEventNameMinLength">
-              {{ERRORS.NAME}} {{ERRORS.IS_REQUIRED}}
-            </div>
-            <ng-template #newEventNameMinLength>
-              <div *ngIf="newEventForm.controls['name'].errors.minlength; else newEventNameMaxLength">
-                {{ERRORS.NAME}} {{ERRORS.TOO_SHORT}}
+<div *ngIf="isAddEventMode">
+  <h3 class="mat-title">Add new event</h3>
+  <md-card class="newEventForm">
+    <form [formGroup]="newEventForm"
+          (ngSubmit)="newEventPost(newEventForm.value); openSnackBar('New event successfully added'); this.newEventForm.reset() ">
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxFlex="48%">
+          <!--left column-->
+          <!--event Name-->
+          <md-form-field>
+            <input mdInput placeholder="{{fields.eventName}}" formControlName="name" #name
+                   autofocus>
+            <md-error *ngIf="!newEventForm.controls['name'].valid && newEventForm.controls['name'].touched">
+              <div *ngIf="newEventForm.controls['name'].errors.required; else newEventNameMinLength">
+                {{ERRORS.NAME}} {{ERRORS.IS_REQUIRED}}
               </div>
-            </ng-template>
-            <ng-template #newEventNameMaxLength>
-              <div *ngIf="newEventForm.controls['name'].errors.maxlength">
-                {{ERRORS.NAME}} {{ERRORS.TOO_LONG}}
+              <ng-template #newEventNameMinLength>
+                <div *ngIf="newEventForm.controls['name'].errors.minlength; else newEventNameMaxLength">
+                  {{ERRORS.NAME}} {{ERRORS.TOO_SHORT}}
+                </div>
+              </ng-template>
+              <ng-template #newEventNameMaxLength>
+                <div *ngIf="newEventForm.controls['name'].errors.maxlength">
+                  {{ERRORS.NAME}} {{ERRORS.TOO_LONG}}
+                </div>
+              </ng-template>
+            </md-error>
+          </md-form-field>
+          <!--event Type-->
+          <md-select placeholder="{{fields.eventType}}" formControlName="event_type"
+                     #event_type>
+            <md-option *ngFor="let type of eventForm.event_types" [value]="type.value">{{ type.viewValue }}</md-option>
+          </md-select>
+          <!--city-->
+          <md-select placeholder="{{fields.selectCity}}" formControlName="city" #city
+                     (change)="loadDistrict($event, city.value)"
+          >
+            <md-option *ngFor="let city of eventForm.locations" [value]="city.value">{{ city.viewValue }}</md-option>
+          </md-select>
+          <!--district-->
+          <md-select placeholder="{{fields.selectDistrict}}" formControlName="district" disabled="true"
+                     #district>
+            <md-option *ngFor="let district of eventForm.districts" [value]="district.value">
+              {{ district.viewValue }}
+            </md-option>
+          </md-select>
+          <!--event Category-->
+          <md-select placeholder="{{fields.eventCategory}}" formControlName="event_category"
+                     #event_category>
+            <md-option *ngFor="let category of eventForm.event_categories" [value]="category.value">
+              {{ category.viewValue }}
+            </md-option>
+          </md-select>
+        </div>
+        <div fxFlex="48%">
+          <!--right column-->
+          <md-form-field class="Description *">
+            <input mdInput placeholder="{{fields.description}}" formControlName="description"
+                   #description>
+            <md-error
+              *ngIf="!newEventForm.controls['description'].valid && newEventForm.controls['description'].touched">
+              <div *ngIf="newEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
+                {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
               </div>
-            </ng-template>
-          </md-error>
-        </md-form-field>
-        <md-select placeholder="Event type" formControlName="event_type" ng-change="newEventValidation()"
-                   #event_type>
-          <md-option *ngFor="let type of event_types" [value]="type.value">{{ type.viewValue }}</md-option>
-        </md-select>
-        <md-select placeholder="Select City" formControlName="city" ng-change="newEventValidation()" #city>
-          <md-option *ngFor="let city of cities" [value]="city.value">{{ city.viewValue }}</md-option>
-        </md-select>
-        <md-select placeholder="Select District" formControlName="district" ng-change="newEventValidation()"
-                   #district>
-          <md-option *ngFor="let district of districts" [value]="district.value">
-            {{ district.viewValue }}
-          </md-option>
-        </md-select>
-        <md-select placeholder="Event category" formControlName="event_category" ng-change="newEventValidation()"
-                   #event_category>
-          <md-option *ngFor="let category of event_categories" [value]="category.value">
-            {{ category.viewValue }}
-          </md-option>
-        </md-select>
-      </div>
-      <div fxFlex="48%">
-        <md-form-field class="Description *">
-          <input mdInput placeholder="Description" formControlName="description" ng-change="newEventValidation()"
-                 #description>
-          <md-error
-            *ngIf="!newEventForm.controls['description'].valid && newEventForm.controls['description'].touched">
-            <div *ngIf="newEventForm.controls['description'].errors.required; else newEventDescriptionMinLength">
-              {{ERRORS.DESCRIPTION}} {{ERRORS.IS_REQUIRED}}
-            </div>
-            <ng-template #newEventDescriptionMinLength>
-              <div
-                *ngIf="newEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
-                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
+              <ng-template #newEventDescriptionMinLength>
+                <div
+                  *ngIf="newEventForm.controls['description'].errors.minlength; else newEventDescriptionMaxLength">
+                  {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_SHORT}}
+                </div>
+              </ng-template>
+              <ng-template #newEventDescriptionMaxLength>
+                <div *ngIf="newEventForm.controls['description'].errors.maxlength">
+                  {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
+                </div>
+              </ng-template>
+            </md-error>
+          </md-form-field>
+          <md-select placeholder="{{fields.eventMode}}" formControlName="event_mode"
+                     #event_mode>
+            <md-option *ngFor="let mode of eventForm.event_modes" [value]="mode.value">
+              {{ mode.viewValue }}
+            </md-option>
+          </md-select>
+          <md-form-field>
+            <input mdInput [mdDatepicker]="picker" placeholder="{{fields.date}}" formControlName="date"
+                   #date>
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+            <md-datepicker #picker></md-datepicker>
+            <md-error *ngIf="!newEventForm.controls['date'].valid && newEventForm.controls['date'].touched">
+              <div *ngIf="newEventForm.controls['date'].errors.required">
+                {{ERRORS.DATE}} {{ERRORS.DATE_PATTERN}}
               </div>
-            </ng-template>
-            <ng-template #newEventDescriptionMaxLength>
-              <div *ngIf="newEventForm.controls['description'].errors.maxlength">
-                {{ERRORS.DESCRIPTION}} {{ERRORS.TOO_LONG}}
-              </div>
-            </ng-template>
-          </md-error>
-        </md-form-field>
-        <md-select placeholder="Event Mode" formControlName="event_mode" ng-change="newEventValidation()"
-                   #event_mode>
-          <md-option *ngFor="let mode of event_modes" [value]="mode.value">
-            {{ mode.viewValue }}
-          </md-option>
-        </md-select>
-        <md-form-field>
-          <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" formControlName="date"
-                 ng-change="newEventValidation()" #date>
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-          <md-datepicker #picker></md-datepicker>
-          <md-error *ngIf="!newEventForm.controls['date'].valid && newEventForm.controls['date'].touched">
-            <div *ngIf="newEventForm.controls['date'].errors.required">
-              {{ERRORS.DATE}} {{ERRORS.DATE_PATTERN}}
-            </div>
-          </md-error>
-        </md-form-field>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="Time" formControlName="time" ng-change="newEventValidation()"
-                 #time>
-        </md-form-field>
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="Price" formControlName="price"
-                 ng-change="newEventValidation()" #price>
-        </md-form-field>
-        <md-form-field class="hidden-field">
-          <input ngControl="lat" [(ngModel)]="lat" mdInput placeholder="lat" formControlName="lat"
-                 ng-change="newEventValidation()">
-        </md-form-field>
-        <md-form-field class="hidden-field">
-          <input ngControl="lng" [(ngModel)]="lng" mdInput placeholder="lng" formControlName="lng"
-                 ng-change="newEventValidation()">
-        </md-form-field>
+            </md-error>
+          </md-form-field>
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="{{fields.time}}" formControlName="time"
+                   #time>
+          </md-form-field>
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="{{fields.price}}" formControlName="price"
+                   #price>
+          </md-form-field>
+          <md-form-field class="hidden-field">
+            <input ngControl="lat" [(ngModel)]="lat" mdInput placeholder="lat" formControlName="lat"
+            >
+          </md-form-field>
+          <md-form-field class="hidden-field">
+            <input ngControl="lng" [(ngModel)]="lng" mdInput placeholder="lng" formControlName="lng"
+            >
+          </md-form-field>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="map_container">
-        <agm-map [styles]="customStyle"
-                 [latitude]="49.853338"
-                 [longitude]="24.024192"
-                 [disableDefaultUI]="true"
-                 [scrollwheel]="false"
-                 [zoom]="13"
-                 fullscreenControl="true"
-                 (mapClick)="mapClicked($event)"
-        >
-          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        </agm-map>
+      <div>
+        <div class="map_container">
+          <agm-map [styles]="map.customStyle"
+                   [latitude]="map.center_lat"
+                   [longitude]="map.center_lng"
+                   [disableDefaultUI]="true"
+                   [scrollwheel]="false"
+                   [zoom]="map.zoomLevel"
+                   fullscreenControl="true"
+                   (mapClick)="mapClicked($event)"
+          >
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </div>
+        <button md-button
+                color="accent"
+                md-raised-button
+                type="submit"
+                [disabled]="!newEventForm.valid"> Add event
+          <md-icon>done</md-icon>
+        </button>
       </div>
-      <div *ngFor="let pos of markers">
-        <md-list-item>
-          {{pos.lat}}
-          <md-divider></md-divider>
-        </md-list-item>
-      </div>
-      <button md-button
-              color="accent"
-              md-raised-button
-              type="submit"
-              [disabled]="!newEventForm.valid"> Add event
-        <md-icon>done</md-icon>
-      </button>
-    </div>
-  </form>
-</md-card>
+    </form>
+  </md-card>
+</div>

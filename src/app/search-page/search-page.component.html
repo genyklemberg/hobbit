@@ -15,30 +15,30 @@
           <md-card-subtitle>Filter results</md-card-subtitle>
           <div fxLayout="row" fxLayoutAlign="space-between start">
             <div fxFlex="46%">
-              <md-select placeholder="Event type">
-                <md-option *ngFor="let type of event_types" [value]="type.value">
+              <md-select placeholder="{{fields.eventType}}">
+                <md-option *ngFor="let type of eventForm.event_types" [value]="type.value">
                   {{ type.viewValue }}
                 </md-option>
               </md-select>
-              <md-select placeholder="Select City">
-                <md-option *ngFor="let city of cities" [value]="city.value">
+              <md-select placeholder="{{fields.selectCity}}">
+                <md-option *ngFor="let city of eventForm.cities" [value]="city.value">
                   {{ city.viewValue }}
                 </md-option>
               </md-select>
-              <md-select placeholder="Select District">
-                <md-option *ngFor="let district of districts" [value]="district.value">
+              <md-select placeholder="{{fields.selectDistrict}}">
+                <md-option *ngFor="let district of eventForm.districts" [value]="district.value">
                   {{ district.viewValue }}
                 </md-option>
               </md-select>
-              <md-select placeholder="Event category">
-                <md-option *ngFor="let category of event_categories" [value]="category.value">
+              <md-select placeholder="{{fields.eventCategory}}">
+                <md-option *ngFor="let category of eventForm.event_categories" [value]="category.value">
                   {{ category.viewValue }}
                 </md-option>
               </md-select>
             </div>
             <div fxFlex="46%">
-              <md-select placeholder="Event Mode">
-                <md-option *ngFor="let mode of event_modes" [value]="mode.value">
+              <md-select placeholder="{{fields.eventMode}}">
+                <md-option *ngFor="let mode of eventForm.event_modes" [value]="mode.value">
                   {{ mode.viewValue }}
                 </md-option>
               </md-select>
@@ -48,10 +48,10 @@
                 <md-datepicker #picker></md-datepicker>
               </md-form-field>
               <md-form-field class="example-full-width">
-                <input mdInput placeholder="Time">
+                <input mdInput placeholder="{{fields.time}}">
               </md-form-field>
               <md-form-field class="example-full-width">
-                <input mdInput placeholder="Price">
+                <input mdInput placeholder="{{fields.price}}">
               </md-form-field>
             </div>
           </div>

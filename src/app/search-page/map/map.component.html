@@ -1,9 +1,20 @@
-<agm-map [styles]="customStyle"
-         [latitude]="49.853338"
-         [longitude]="24.024192"
+<agm-map #agm [styles]="map.customStyle"
+         [latitude]="map.center_lat"
+         [longitude]="map.center_lng"
          [disableDefaultUI]="true"
          [scrollwheel]="false"
-         [zoom]="12"
+         [zoom]="map.zoomLevel"
          fullscreenControl="true">
-  <agm-marker *ngFor="let event of events" [latitude]="event.lat" [longitude]="event.lng"></agm-marker>
+  <agm-marker *ngFor="let event of events"
+              (markerClick)="agm.lastOpen?.close(); agm.lastOpen = infoWindow"
+              [latitude]="event.lat"
+              [longitude]="event.lng">
+    <agm-info-window #infoWindow>
+      <div class="info-window">
+        <strong> {{event.name}}</strong>
+        <span>{{event.description}}</span>
+        <a href="event/{{event.$key}}">View single</a>
+      </div>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
