@@ -55,12 +55,12 @@ export class ProfilePictureCropper {
 
 export class PictureCropper {
   public profileImage: string;
-  public profileImageData:any;
-  public cropperSettings:CropperSettings;
-  public croppedWidth:number;
-  public croppedHeight:number;
+  public profileImageData: any;
+  public cropperSettings: CropperSettings;
+  public croppedWidth: number;
+  public croppedHeight: number;
 
-  @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
+  @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
 
   constructor(public dialogRef: MdDialogRef<PictureCropper>) {
     this.cropperSettings = new CropperSettings();
@@ -85,9 +85,9 @@ export class PictureCropper {
     this.profileImageData = {};
   }
 
-  cropped(bounds:Bounds) {
-    this.croppedHeight =bounds.bottom-bounds.top;
-    this.croppedWidth = bounds.right-bounds.left;
+  cropped(bounds: Bounds) {
+    this.croppedHeight = bounds.bottom - bounds.top;
+    this.croppedWidth = bounds.right - bounds.left;
   }
 
   fileChangeListener($event) {
@@ -105,7 +105,7 @@ export class PictureCropper {
   }
 
   updateProfilePicture(userId, profilePicture){
-    // TODO implement updateUserPicture methode
+    // TODO implement updateUserPicture method
     // this.UserService.updateUserPicture(userId, profilePicture);
   }
 }
